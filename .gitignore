@@ -1,0 +1,27 @@
+# LaTeX build files
+*.aux
+*.fdb_latexmk
+*.fls
+*.log
+*.toc
+*.synctex.gz
+*.out
+*.lof
+*.lot
+*.bbl
+*.blg
+
+# Keep specific PDF files if needed, but ignore others
+*.pdf
+!circuits.pdf
+
+# Python cache files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Windows / OS garbage
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+.DS_Store

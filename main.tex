@@ -1,0 +1,2615 @@
+\documentclass[12pt,a4paper]{report}
+
+% ---------------------------------
+% PACKAGES
+% ---------------------------------
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+\usepackage{graphicx}
+\usepackage{geometry}
+\geometry{margin=2.5cm}
+\usepackage{setspace}
+\onehalfspacing
+\usepackage{titlesec}
+\usepackage{xcolor}
+\usepackage{amsmath, amssymb, amsfonts, mathtools}
+\usepackage{float}
+\usepackage[hidelinks]{hyperref}
+\usepackage{listings}
+\usepackage{tikz}
+\usepackage{tcolorbox}
+\usepackage{float}
+\usetikzlibrary{shapes.geometric, arrows, positioning, calc, 3d, decorations.pathreplacing, fit, backgrounds, shadows, patterns, intersections, angles, quotes}
+\usepackage{pgfplots}
+\usepackage{pgfplotstable}
+\pgfplotsset{compat=1.18}
+\usepgfplotslibrary{polar}
+\usepackage{circuitikz}
+
+% Flowchart node styles
+\tikzstyle{startstop} = [rectangle, rounded corners, minimum width=3cm, minimum height=1cm,text centered, draw=black, fill=red!30]
+\tikzstyle{process} = [rectangle, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=orange!30]
+\tikzstyle{decision} = [diamond, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=green!30, aspect=2]
+\tikzstyle{io} = [trapezium, trapezium left angle=70, trapezium right angle=110, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=blue!30]
+\tikzstyle{arrow} = [thick,->,>=stealth]
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{fancyhdr}
+\usepackage{tcolorbox}
+\usepackage{enumitem}
+\usepackage{siunitx}
+\usepackage[absolute,overlay]{textpos}
+
+% ---------------------------------
+% STYLES & CONFIGURATIONS
+% ---------------------------------
+\definecolor{myblue}{HTML}{07D3F2}
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+\lstset{style=mystyle}
+
+\newtcolorbox{definition}[1]{colback=blue!5!white,colframe=black!75!black,fonttitle=\bfseries,title=Définition : #1}
+\newtcolorbox{remarque}{colback=yellow!5!white,colframe=yellow!50!black,fonttitle=\bfseries,title=Remarque}
+\newtcolorbox{casdetude}{colback=green!5!white,colframe=green!50!black,fonttitle=\bfseries,title=Cas d'étude}
+
+\titleformat{\chapter}[display]{\normalfont\bfseries\huge}{\chaptername\ \thechapter}{20pt}{\Huge}
+
+% Headers and Footers
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\leftmark}
+\fancyhead[R]{\thepage}
+
+% ---------------------------------
+% DOCUMENT START
+% ---------------------------------
+\begin{document}
+
+% ---------------------------------
+% 1) COVER PAGE (VERBATIM)
+% ---------------------------------
+\begin{titlepage}
+ 
+    \vspace*{-2cm} % Adjust to move the row up
+    \noindent
+    \begin{minipage}{0.3\textwidth}
+        \includegraphics[width=\linewidth]{images.png} % Left logo
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.4\textwidth}
+        \begin{center}
+            \textcolor{myblue}{\scriptsize\textbf{Royaume du Maroc\\
+            Université Abdelmalek Essaâdi\\
+            Faculté des Sciences et Techniques Tanger\\
+            Département de Génie Electrique}}
+        \end{center}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.25\textwidth}
+        \includegraphics[width=\linewidth]{download.png} % Right logo
+    \end{minipage}
+
+    \vfill
+
+   % \vspace{2cm}
+\begin{center}
+        \Huge{\textbf{Stage d’observation}}\\[0.5cm]
+      % \large{Pour l’obtention :}\\[0cm]
+ % \LARGE{\textbf{Diplôme d’ingénieur  }}\\[0.1cm]
+  \LARGE{\textbf{\Large{Filière:} \textbf{Génie Electrique et Management industriel}}}\\[0.2cm]
+  \rule{\linewidth}{0.5mm}\\
+        \LARGE{\textbf{Étude et réalisation d'un Télescope Dobsonien Autoguidés}}\\
+        \rule{\linewidth}{0.5mm}\\
+\begin{center}
+\begin{minipage}{0.64\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{telescope.png}
+\end{minipage}
+\end{center}
+
+\begin{center}
+    \makebox[-10pt]{ % This box can be shifted with \hspace or \raisebox
+        \begin{minipage}{0.6\textwidth} % Total width of both logos
+            \centering
+            \begin{minipage}{0.7\textwidth}
+                \includegraphics[width=\linewidth]{logo_orangedigitalcenter.png} % First logo
+            \end{minipage}
+            \hfill
+            \begin{minipage}{0.6\textwidth}
+                \includegraphics[width=\linewidth]{Screenshot 2026-05-19 113752.png} % Second logo
+            \end{minipage}
+        \end{minipage}
+    }
+    \vspace{0.5cm}
+\end{center}
+
+        \large{Réalisé par : \textbf{AK-HAIL Oussama}}\\[0.3cm]
+        Encadré par : \textbf{Mohammed Bsiss}\\[2cm]
+
+        \large{Année Universitaire : 2024--2025}
+    \end{center}
+\end{titlepage}
+
+\pagenumbering{roman}
+\clearpage
+
+% ---------------------------------
+% 2) DEDICACE
+% ---------------------------------
+\chapter*{Dédicace}
+\addcontentsline{toc}{chapter}{Dédicace}
+\begin{center}
+\itshape
+
+
+Avant toute chose, je rends grâce à \textbf{Allah}, le Tout-Puissant, pour m'avoir accordé la force, la patience et la persévérance nécessaires pour surmonter les épreuves et mener ce travail à son accomplissement.\\
+
+Je dédie ce travail à mes chers parents, pour leur amour inconditionnel, leur soutien indéfectible et les sacrifices qu'ils ont consentis tout au long de mon parcours.\\
+
+Je le dédie également à toutes les personnes qui m'ont accompagné de près ou de loin durant cette étape importante de ma vie, ainsi qu’à \textbf{Oussama Belarch} et \textbf{Adil Agoussal} pour leur aide précieuse et leur immense soutien lors de la réalisation de ce projet.\\
+
+Ce projet occupe une place particulière dans mon cœur. Bien plus qu'un simple projet d'ingénierie, il a été réalisé durant une période marquante de mon existence, celle où j'ai appris mon diagnostic de \textbf{cancer}. Dans les premiers jours de cette épreuve, alors que l'incertitude et les inquiétudes occupaient mon esprit, ce télescope est devenu bien plus qu'un ensemble de pièces mécaniques, électroniques et logicielles : il est devenu un refuge, une source de motivation et un moyen de continuer à avancer malgré les difficultés.\\
+
+Chaque étape de sa conception, chaque calcul, chaque pièce assemblée et chaque ligne de code écrite m'ont permis de garder le regard tourné vers l'avenir. Ce projet m'a offert des moments d'espoir lorsque j'en avais le plus besoin, et il gardera toujours une valeur unique, même parmi des réalisations futures plus ambitieuses.\\
+
+Je souhaite également exprimer ma profonde gratitude à mon oncologue, \textbf{Dr Zouhour Idder Fadoukhair}, pour son professionnalisme, sa bienveillance et le soutien qu'elle m'a apportés tout au long de mon parcours médical. Son accompagnement m'a donné la force et la sérénité nécessaires pour poursuivre mes études et mener ce projet à son terme.\\
+
+À toutes les personnes qui ont cru en moi, soutenu mes efforts et partagé cette aventure, je dédie humblement ce travail.
+\end{center}
+
+\clearpage
+
+% ---------------------------------
+% 3) REMERCIEMENTS
+% ---------------------------------
+\chapter*{Remerciements}
+\addcontentsline{toc}{chapter}{Remerciements}
+Je tiens à exprimer ma profonde gratitude envers toutes les personnes qui ont contribué au succès de ce stage et de ce projet de fin d'études.
+
+Mes remerciements s'adressent tout particulièrement à mon encadrant, \textbf{Monsieur Mohammed Bsiss}, pour son encadrement précieux, ses conseils judicieux et son accompagnement tout au long de la réalisation de ce projet de télescope autoguidé. 
+
+Je remercie également chaleureusement les équipes d'\textbf{Orange Digital Center Agadir} pour m'avoir ouvert les portes de leur FabLab, un espace propice à la créativité et à l'ingénierie, ainsi que \textbf{Moussasoft} et \textbf{Monsieur Moussa Lhoussin} pour leur expertise technique et la mise à disposition des composants électroniques indispensables à la concrétisation de ce projet.
+
+Enfin, je remercie tout le corps professoral de la \textbf{Faculté des Sciences et Techniques de Tanger (FSTT)} pour la qualité de l'enseignement dispensé durant mes années d'études au sein du département de Génie Électrique.
+
+\clearpage
+
+% ---------------------------------
+% 4) RESUME / ABSTRACT
+% ---------------------------------
+\chapter*{Résumé}
+\addcontentsline{toc}{chapter}{Résumé}
+Ce rapport détaille la conception, la modélisation mathématique et la réalisation matérielle et logicielle d'un télescope Dobsonien autoguidé. L'objectif principal de ce projet est de rendre l'observation astronomique accessible en automatisant le pointage et le suivi des objets célestes. La partie mécanique a été conçue sur Onshape et imprimée en 3D, combinée à des éléments en plexiglass. Le système électronique s'articule autour de deux microcontrôleurs Arduino Nano séparant la commande des moteurs pas-à-pas de l'interface utilisateur afin d'éviter les parasites électromagnétiques. 
+Plusieurs modes de fonctionnement ont été développés : un mode hors-ligne implémentant les équations de trigonométrie sphérique pour convertir les coordonnées équatoriales en coordonnées horizontales, un mode en ligne interfacé avec Stellarium via un script Python (Selenium), un mode manuel par joystick, et un mode de suivi compensant la rotation terrestre. Ce projet a été réalisé en partenariat avec Orange Digital Center et Moussasoft.
+
+%\textbf{Mots-clés :} Télescope Dobsonien, Autoguidage, Arduino, Trigonométrie sphérique, Mécatronique, Stellarium, Impression 3D.
+
+\vspace{2cm}
+
+\begin{center}
+\textbf{Abstract}
+\end{center}
+\addcontentsline{toc}{chapter}{Abstract}
+This report details the design, mathematical modeling, and hardware/software implementation of an autoguided Dobsonian telescope. The main objective of this project is to make astronomical observation more accessible by automating the aiming and tracking of celestial objects. The mechanical structure was designed using Onshape, utilizing 3D printing and plexiglass components. The electronic system is based on two Arduino Nano microcontrollers, completely isolating the stepper motor drivers from the user interface and calculation unit to prevent electromagnetic interference.
+Several operational modes were developed: an offline mode implementing spherical trigonometry equations to convert equatorial coordinates to horizontal coordinates, an online mode interfaced with Stellarium via a Python scraping script (Selenium), a manual mode using a joystick, and a tracking mode to compensate for Earth's rotation. This project was carried out in partnership with Orange Digital Center and Moussasoft.
+
+%\textbf{Keywords:} Dobsonian Telescope, Autoguiding, Arduino, Spherical trigonometry, Mechatronics, Stellarium, 3D printing.
+
+\clearpage
+
+% ---------------------------------
+% 5) LISTE DES ABREVIATIONS
+% ---------------------------------
+\chapter*{Liste des abréviations}
+\addcontentsline{toc}{chapter}{Liste des abréviations}
+\begin{description}[font=\bfseries, labelwidth=2.5cm, leftmargin=3cm]
+    \item[Alt] Altitude (ou Hauteur)
+    \item[Az] Azimut
+    \item[API] Application Programming Interface
+    \item[CAD] Computer-Aided Design (CAO : Conception Assistée par Ordinateur)
+    \item[Dec] Déclinaison
+%    \item[FSTT] Faculté des Sciences et Techniques de Tanger
+    \item[GST] Greenwich Sidereal Time (Temps Sidéral de Greenwich)
+    \item[GUI] Graphical User Interface (Interface Graphique Utilisateur)
+    \item[HA] Hour Angle (Angle Horaire)
+    \item[IDE] Integrated Development Environment (Environnement de Développement Intégré)
+    \item[LST] Local Sidereal Time (Temps Sidéral Local)
+    \item[ODC] Orange Digital Center
+    \item[PWM] Pulse Width Modulation (Modulation par Largeur d'Impulsion)
+    \item[RA] Right Ascension (Ascension Droite)
+    \item[UT] Universal Time (Temps Universel)
+\end{description}
+
+\clearpage
+
+% ---------------------------------
+% 6) TABLES (TOC, LOF, LOT)
+% ---------------------------------
+\tableofcontents
+\clearpage
+\listoffigures
+\addcontentsline{toc}{chapter}{Liste des figures}
+\clearpage
+\listoftables
+\addcontentsline{toc}{chapter}{Liste des tableaux}
+\clearpage
+
+\pagenumbering{arabic}
+
+% ---------------------------------
+% 7) INTRODUCTION GENERALE
+% ---------------------------------
+\chapter*{Introduction générale}
+\addcontentsline{toc}{chapter}{Introduction générale}
+L'astronomie est l'une des sciences les plus anciennes, guidant l'humanité depuis des millénaires. Au Maroc, l'observation du ciel nocturne bénéficie de conditions géographiques et climatiques très favorables, notamment dans les régions du sud et de l'Atlas. Toutefois, la pratique de l'astronomie amateur se heurte souvent à une barrière technique majeure : le repérage et le suivi des objets célestes. Face à l'immensité de la voûte céleste, l'alignement manuel d'un télescope requiert de l'expérience, de la patience, et une solide connaissance du ciel.
+
+\textbf{Problématique :} L'observation prolongée ou l'astrophotographie (qui nécessite l'accumulation ou "stacking" de lumière) exige de compenser la rotation terrestre avec une précision redoutable. Les montures équatoriales motorisées commerciales qui remplissent ce rôle sont souvent onéreuses, complexes à calibrer pour un novice, et encombrantes. Les montures alt-azimutales (de type Dobsonien), bien que mécaniquement simples et robustes, ne permettent pas un suivi intuitif car les deux axes doivent bouger à des vitesses variables simultanément.
+
+\textbf{Objectifs du projet :} Ce projet de stage a pour ambition de démocratiser l'accès à l'astronomie en proposant l'étude et la réalisation d'un \textbf{télescope Dobsonien autoguidé} (système GoTo open-source). L'objectif est de concevoir un dispositif mécatronique abordable combinant l'impression 3D, la programmation embarquée (Arduino), la trigonométrie sphérique et l'exploitation de données web (Stellarium) pour automatiser le pointage et le suivi des astres.
+
+\textbf{Méthodologie :} Le développement du projet s'est articulé autour d'une approche systémique. La conception mécanique (CAO) a été réalisée sur Onshape. L'optique a été dimensionnée sur la base d'équations de conjugaison standard. L'électronique s'est construite sur une architecture maître/esclave avec deux cartes Arduino Nano pour scinder le calcul pur (interface et trigonométrie) de la commande de puissance (moteurs pas-à-pas NEMA 17). Enfin, la programmation a fait appel à l'environnement Arduino (C++) pour l'embarqué et Python pour la passerelle logicielle.
+
+\textbf{Plan du rapport :} Ce rapport s'organise en trois grands chapitres. Le premier chapitre dresse un état de l'art sur les télescopes, leurs montures et les principes d'autoguidage. Le deuxième chapitre présente les entreprises d'accueil, Orange Digital Center et Moussasoft, ayant soutenu ce projet. Le troisième chapitre, cœur de ce mémoire, détaille minutieusement la conception optique, mécanique, électrique et logicielle du télescope, incluant l'analyse mathématique des modes de fonctionnement (hors-ligne, en ligne, suivi et manuel).
+
+\clearpage
+
+% ---------------------------------
+% CHAPITRE 1
+% ---------------------------------
+\chapter{Les Télescopes et Systèmes Autoguidés}
+\section{Introduction}
+Ce chapitre a pour vocation de poser les bases théoriques de l'optique instrumentale et de l'astronomie d'observation. Nous y explorerons les différents types de télescopes, les montures qui les supportent, ainsi que les principes fondamentaux qui régissent les systèmes autoguidés.
+
+\section{Les Télescopes}
+\subsection{Histoire et principe optique général}
+Le télescope a révolutionné notre compréhension de l'univers depuis les premières observations de Galileo Galilei en 1609, lorsque celui-ci pointa pour la première fois une lunette artisanale vers la voûte céleste et y découvrit les quatre principales lunes de Jupiter (Io, Europe, Ganymède et Callisto).
+ \begin{figure}[H]
+	\centering
+	\includegraphics[width=0.6\linewidth]{galileo.png}
+	\caption{Galileo Galilei Telescope by hulton archiva}
+\end{figure}
+
+Cette découverte fonda la révolution copernicienne et démontra que tous les corps célestes ne tournent pas autour de la Terre. Quelques décennies plus tard, Isaac Newton, frustré par les aberrations chromatiques inhérentes aux lunettes à lentilles, conçut en 1668 le premier télescope à miroir, ouvrant la voie aux grands instruments modernes \cite{rutten}.
+
+
+\begin{figure}[H]
+    \centering
+    % Première image (Champ fixe)
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Screenshot 2026-05-18 163526.png}
+        \caption{ telescope à lentilles  }
+        \label{fig:champ_fixe}
+    \end{subfigure}
+    \hfill % Crée un espace élastique horizontal entre les deux images
+    % Deuxième image (Champ tournant)
+    \begin{subfigure}[b]{0.445\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Screenshot 2026-05-18 163539.png}
+        \caption{telescope à miroir }
+        \label{fig:champ_tournant}
+    \end{subfigure}
+    \caption{Les aberrations chromatiques dans un telescope à lentilles et telescope à miroir }
+    \label{fig:champs_stator}
+\end{figure}
+
+
+
+
+
+    
+
+Son principe repose sur la collecte de la lumière (via un objectif réfractif ou un miroir primaire réflectif) pour former une image dans le plan focal, qui est ensuite agrandie par un oculaire fonctionnant comme une loupe. L'objectif d'un instrument d'astronomie n'est pas seulement de grossir, mais surtout d'augmenter la quantité de lumière perçue (le pouvoir collecteur, proportionnel à $D^2$) et de séparer les détails angulaires les plus fins (le pouvoir séparateur).
+
+\begin{definition}{Plan focal}
+On appelle plan focal le lieu géométrique des points où convergent les rayons issus d'un objet situé à l'infini après leur passage à travers le système optique. Pour un astre situé à des années-lumière de la Terre, les rayons incidents arrivent quasi parallèles, et l'image se forme exactement à la distance focale $f$ du système.
+\end{definition}
+
+
+\subsection{Grandeurs caractéristiques}
+Tout instrument optique astronomique se définit par plusieurs paramètres mathématiques fondamentaux dont l'analyse rigoureuse conditionne le choix des composants et la qualité de l'image finale. Nous présentons ci-dessous les principales grandeurs, avec leurs formulations analytiques.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.75\linewidth]{distance focal.png}
+	\caption{distance focal}
+\end{figure}
+\begin{itemize}
+    \item \textbf{La distance focale ($f$)} : Distance entre la lentille (ou le miroir primaire) et le plan focal où se forme l'image d'un objet situé à l'infini. Elle s'exprime en millimètres et conditionne directement le grossissement.
+    \item \textbf{L'ouverture ($D$)} : Le diamètre de l'objectif (ou du miroir primaire), exprimé en mm. C'est le paramètre le plus déterminant car il fixe à la fois le pouvoir collecteur et le pouvoir séparateur.
+    \item \textbf{Le rapport $f/D$} (ou nombre d'ouverture) : Détermine la "rapidité" optique. Un instrument court (f/D = 4 à 6) est dit \textit{rapide} et favorise l'astrophotographie du ciel profond ; un instrument long (f/D = 10 à 15) favorise les hauts grossissements planétaires.
+    \item \textbf{Le grossissement ($G$)} :
+    \begin{equation}
+        G = \frac{f_{\text{objectif}}}{f_{\text{oculaire}}}
+    \end{equation}
+    Notons qu'au-delà d'un \textit{grossissement utile maximal} approximé par $G_{\max} \approx 2 \cdot D$ (avec $D$ en mm), l'image se dégrade par dilution lumineuse sans gain de détail.
+    \item \textbf{Le pouvoir séparateur} (Formule de Dawes), exprimé en secondes d'arc :
+    \begin{equation}
+        P_s = \frac{116}{D \text{ (en mm)}}
+    \end{equation}
+    Cette limite empirique caractérise la séparation minimale entre deux étoiles doubles que l'instrument peut résoudre. Elle découle du critère de Rayleigh appliqué à la diffraction par une ouverture circulaire :
+    \begin{equation}
+        \theta_{\text{Rayleigh}} = 1{,}22 \frac{\lambda}{D}
+    \end{equation}
+    où $\lambda$ est la longueur d'onde de la lumière (typiquement $550$ nm pour le visible).
+    \item \textbf{Le pouvoir collecteur} (relatif à l'œil humain dont la pupille atteint $\sim 7$ mm) :
+    \begin{equation}
+        P_c = \left(\frac{D_{\text{télescope}}}{D_{\text{œil}}}\right)^2 = \left(\frac{D}{7}\right)^2
+    \end{equation}
+    \item \textbf{La magnitude limite} accessible avec l'instrument :
+    \begin{equation}
+        m_{\text{lim}} = 2{,}1 + 5 \log_{10}(D_{\text{mm}})
+    \end{equation}
+\end{itemize}
+
+\begin{table}[H]
+    \centering
+    \caption{Grandeurs optiques calculées pour notre télescope (objectif $f_{obj} = 1000$ mm, $D = 50$ mm).}
+    \begin{tabular}{|l|c|c|}
+        \hline
+        \textbf{Grandeur} & \textbf{Formule} & \textbf{Valeur} \\
+        \hline
+        Grossissement $G$ & $f_{obj}/f_{oc}$ & $\approx 12 \times$ \\
+        Rapport $f/D$ & $1000/50$ & $f/20$ \\
+        Pouvoir séparateur de Dawes & $116/D$ & $\approx 2{,}32''$ \\
+        Critère de Rayleigh & $1{,}22 \lambda /D$ & $\approx 2{,}77''$ \\
+        Pouvoir collecteur & $(D/7)^2$ & $\approx 51 \times$ \\
+        Magnitude limite & $2{,}1 + 5\log_{10}(D)$ & $\approx 10{,}6$ \\
+        %Grossissement utile max & $2D$ & $\approx 100 \times$ \\
+        \hline
+    \end{tabular}
+    \label{tab:grandeurs_optiques}
+\end{table}
+
+\section{Types de télescopes}
+\subsection{Télescope Réfracteur (Lunette astronomique)}
+La lunette astronomique, ou télescope réfracteur, utilise une combinaison de lentilles convergentes pour réfracter et focaliser la lumière incidente. C'est le plus ancien type d'instrument optique astronomique, inventé indépendamment par plusieurs opticiens hollandais au début du XVII\textsuperscript{e} siècle, puis perfectionné par Galilée et Kepler. Sa configuration la plus courante (configuration képlérienne) repose sur deux lentilles convergentes : un objectif de grande focale et un oculaire de courte focale, séparées d'une distance égale à $f_{obj} + f_{oc}$.
+
+L'image formée au foyer de l'objectif est une image réelle, renversée, vue ensuite à travers l'oculaire qui agit comme une loupe. Le grossissement angulaire est alors donné par $G = f_{obj} / f_{oc}$.
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}[scale=0.8]
+        % Axe optique
+        \draw[dashed, thin] (-6,0) -- (6,0);
+        % Lentille objectif
+        \draw[thick, fill=blue!10] (-4,-2) to[bend right=20] (-4,2) to[bend right=20] (-4,-2);
+        \node at (-4, 2.5) {Objectif ($L_1$)};
+        % Lentille oculaire
+        \draw[thick, fill=blue!10] (4,-1) to[bend right=30] (4,1) to[bend right=30] (4,-1);
+        \node at (4, 1.5) {Oculaire ($L_2$)};
+        % Rayons lumineux
+        \draw[red, thick] (-6,1.5) -- (-4,1.5) -- (2,0) -- (4,-0.5) -- (6,-0.5);
+        \draw[red, thick] (-6,-1.5) -- (-4,-1.5) -- (2,0) -- (4,0.5) -- (6,0.5);
+        \filldraw[black] (2,0) circle (2pt) node[anchor=south west] {Foyer};
+    \end{tikzpicture}
+    \caption{Schéma de principe d'un télescope réfracteur (Lunette).}
+    \label{fig:refracteur}
+\end{figure}
+Les réfracteurs offrent un bon contraste, une excellente stabilité (tube fermé limitant les courants thermiques) et une absence d'obstruction centrale. Toutefois, ils souffrent d'\textbf{aberrations chromatiques} (halo coloré dû à la dispersion : les longueurs d'onde courtes — bleu — sont plus déviées que les rouges) à moins d'utiliser des doublets achromatiques (verres crown et flint accolés) ou des triplets apochromatiques très onéreux. De plus, leur diamètre maximal est limité car au-delà de $\sim 200$ mm, le poids du verre déforme l'objectif sous son propre poids.
+
+\begin{table}[H]
+    \centering
+    \caption{Avantages et inconvénients des télescopes réfracteurs.}
+    \begin{tabular}{|p{6cm}|p{6cm}|}
+        \hline
+        \textbf{Avantages} & \textbf{Inconvénients} \\
+        \hline
+        Excellent contraste et netteté & Aberration chromatique \\
+        Pas d'obstruction centrale & Coût élevé pour grands diamètres \\
+        Tube fermé (peu de turbulence interne) & Tube long et encombrant \\
+        Robuste et stable mécaniquement & Poids important \\
+        Peu d'entretien (pas de réalignement) & Diamètres limités à $\sim 200$ mm \\
+        \hline
+    \end{tabular}
+\end{table}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\linewidth]{refracteur telescope.png}
+	\caption{Exemple commercial d’un télescope réfracteur achromatique.}
+\end{figure}
+
+\subsection{Télescope Réflecteur (Newton)}
+Inventé par Isaac Newton, ce télescope utilise un miroir primaire parabolique ou sphérique pour concentrer la lumière, et un miroir secondaire plan pour dévier le faisceau vers l'oculaire.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.75\linewidth]{telescope de newton.png}
+	\caption{Schéma de principe d’un télescope de Newton}
+\end{figure}
+Il permet de grands diamètres à moindre coût et ne présente pas d'aberration chromatique car la réflexion sur un miroir est indépendante de la longueur d'onde. En revanche, il introduit des aberrations propres : \textbf{coma} (élongation des étoiles hors-axe), \textbf{astigmatisme}, et \textbf{aberration de sphéricité} si le miroir n'est pas parfaitement parabolique. La présence d'un miroir secondaire crée également une \textbf{obstruction centrale} qui réduit le contraste et provoque des aigrettes de diffraction caractéristiques autour des étoiles brillantes.
+
+Plusieurs variantes existent :
+\begin{itemize}
+    \item \textbf{Newton} : miroir primaire parabolique + secondaire plan à 45° (configuration choisie pour notre projet).
+    \item \textbf{Cassegrain} : miroir primaire parabolique troué + secondaire hyperbolique convexe renvoyant la lumière à travers le primaire.
+    \item \textbf{Schmidt-Cassegrain} : ajoute une lame correctrice à l'entrée pour corriger l'aberration sphérique.
+    \item \textbf{Ritchey-Chrétien} : variante du Cassegrain avec primaire et secondaire hyperboliques, élimine le coma — adoptée par le Hubble Space Telescope.
+\end{itemize}
+
+\begin{table}[H]
+    \centering
+    \caption{Comparatif des configurations de télescopes réflecteurs.}
+    \begin{tabular}{|l|c|c|c|c|}
+        \hline
+        \textbf{Type} & \textbf{Primaire} & \textbf{Secondaire} & \textbf{Compact} & \textbf{Coût} \\
+        \hline
+        Newton & Parabolique & Plan & Non & Faible \\
+        Cassegrain & Parabolique & Hyperbolique & Oui & Moyen \\
+        Schmidt-Cassegrain & Sphérique + lame & Sphérique & Très & Élevé \\
+        Ritchey-Chrétien & Hyperbolique & Hyperbolique & Oui & Très élevé \\
+        \hline
+    \end{tabular}
+\end{table}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.6\linewidth]{telescope de newton commercial.png}
+	\caption{Télescope de Newton commercial sur monture Équatoriale}
+\end{figure}
+
+\section{Les Montures}
+\subsection{Monture Équatoriale}
+La monture équatoriale possède un axe aligné parallèlement à l'axe de rotation de la Terre, c'est-à-dire pointant vers le pôle céleste nord (matérialisé en pratique par l'étoile Polaris, $\alpha$ Ursae Minoris). Cet alignement, appelé \textit{mise en station polaire}, est l'étape la plus délicate de l'usage d'une telle monture : toute erreur d'azimut ou de hauteur du pôle est répercutée comme dérive systématique des coordonnées.
+
+Pour compenser la rotation terrestre, il suffit de motoriser un seul axe (Ascension Droite, ou RA) à une vitesse angulaire constante :
+\begin{equation}
+    \omega_{\text{sidérale}} = \frac{360^\circ}{23\,\text{h}\,56\,\text{min}\,4{,}1\,\text{s}} \approx 15{,}04107^\circ/\text{heure} \approx 4{,}178 \times 10^{-3}\,{}^\circ/\text{s}
+\end{equation}
+On distingue deux grandes familles : la \textbf{monture allemande} (axes en croix avec contrepoids) et la \textbf{monture à fourche} (le tube est encastré entre deux bras pivotant autour de l'axe polaire).
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\linewidth]{ChatGPT Image May 18, 2026, 05_46_45 PM.png}
+	\caption{Principe de la monture équatoriale}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\linewidth]{almend.png}
+	\caption{une monture équatoriale allemande}
+\end{figure}
+
+\subsection{Monture Dobsonienne (Alt-Az)}
+La monture de type Dobson (ou Alt-Azimutale) repose sur deux axes perpendiculaires : l'azimut (rotation horizontale) et l'altitude (mouvement vertical).
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\linewidth]{debchat.png}
+	\caption{ Principe cinématique d’une monture Alt-Azimutale.}
+\end{figure}
+Elle est \textbf{ extrêmement stable et facile à fabriquer}, ce qui en a fait la solution privilégiée des astronomes amateurs depuis sa popularisation par John Dobson dans les années 1970. Son architecture s'apparente à celle d'un canon : un axe vertical d'azimut (rotation autour de la verticale du lieu) et un axe horizontal d'altitude (tangage). Toutefois, pour suivre une étoile à travers le ciel, il faut faire varier \textit{simultanément} l'altitude et l'azimut à des vitesses \textit{non constantes} (et même non monotones près du méridien), requérant un calculateur embarqué — c'est précisément l'objet de notre projet d'autoguidage.
+
+\begin{table}[H]
+    \centering
+    \caption{Comparaison des montures équatoriale et Dobsonienne.}
+    \label{tab:montures}
+    % This forces the wide table to sit perfectly dead-center on your page
+    \makebox[\textwidth][c]{
+        \begin{tabular}{|>{\raggedright\arraybackslash}p{4.5cm}|>{\raggedright\arraybackslash}p{6.5cm}|>{\raggedright\arraybackslash}p{5cm}|}
+            \hline
+            \textbf{Critère} & \textbf{Équatoriale} & \textbf{Dobsonienne (Alt-Az)} \\
+            \hline
+            Coût & Élevé & Faible \\
+            Complexité mécanique & Élevée (contrepoids, axes obliques) & Très faible (deux paliers) \\
+            Suivi sidéral & 1 moteur à vitesse constante & 2 moteurs à vitesse variable \\
+            Mise en station & Indispensable (vers le pôle) & Aucune \\
+            Champ de rotation & Aucun & Présent (rotation d'image) \\
+            Adapté astrophoto longue pose & Oui & Difficile (sans dérotateur) \\
+            Adapté observation visuelle & Oui & Excellent \\
+            Stabilité & Moyenne (porte-à-faux) & Excellente (centre de gravité bas) \\
+            \hline
+        \end{tabular}
+    }
+\end{table}
+\section{Les Télescopes Autoguidés}
+\subsection{Objectifs du GoTo et de l'autoguidage}
+L'autoguidage permet de pointer automatiquement des objets peu lumineux, invisibles à l'œil nu. En astrophotographie, le suivi permet le "stacking" (empilement de poses courtes). Le rapport signal sur bruit (SNR) s'améliore selon la formule :
+\begin{equation}
+    SNR \propto \sqrt{N}
+\end{equation}
+où $N$ est le nombre de poses. Sans suivi, les étoiles laisseraient des traînées lumineuses (star trails).
+
+\subsection{Principe de fonctionnement et architecture}
+Le système nécessite trois informations sources : (i) les coordonnées équatoriales de la cible (Ascension droite $RA$ et Déclinaison $Dec$), (ii) une horloge précise permettant de calculer le Temps Sidéral local, et (iii) la géolocalisation (latitude $\phi$, longitude $\lambda$) de l'observateur. Ces données alimentent une transformation trigonométrique sphérique (matrice de passage du repère équatorial au repère horizontal local), dont la sortie commande des drivers de moteurs pas-à-pas via un microcontrôleur embarqué.
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}[node distance=1.6cm, scale=0.85, transform shape]
+        \node (input) [io] {Catalogue $(RA, Dec)$};
+        \node (clock) [io, right=of input] {RTC : $(Y,M,D,h,m,s)$};
+        \node (geo) [io, right=of clock] {GPS : $(\phi, \lambda)$};
+        \node (calc) [process, below=of clock] {Calcul trigo sphérique};
+        \node (out) [process, below=of calc] {$(Alt, Az)$ obtenus};
+        \node (drv) [process, below=of out] {Driver A4988 / DRV8825};
+        \node (mot) [startstop, below=of drv] {Moteurs NEMA17};
+        \draw [arrow] (input) -- (calc);
+        \draw [arrow] (clock) -- (calc);
+        \draw [arrow] (geo) -- (calc);
+        \draw [arrow] (calc) -- (out);
+        \draw [arrow] (out) -- (drv);
+        \draw [arrow] (drv) -- (mot);
+    \end{tikzpicture}
+    \caption{Architecture fonctionnelle générique d'un système d'autoguidage.}
+    \label{fig:archi_general}
+\end{figure}
+
+L'autoguidage différentiel — par opposition au simple GoTo — implique une boucle de correction permanente afin de compenser les dérives mécaniques (jeu d'engrenages, glissement de la courroie) et la rotation terrestre. Dans les systèmes les plus avancés, une caméra auxiliaire surveille une étoile-guide et envoie des micro-corrections via un protocole \texttt{ST4} ; dans notre prototype, ce rôle est joué par le calcul trigonométrique réactualisé toutes les secondes.
+
+\section{Conclusion }
+Ce chapitre a permis d'établir les bases théoriques de l'instrumentation astronomique : nous avons défini les grandeurs caractéristiques (focale, ouverture, grossissement, pouvoir séparateur), comparé les architectures réfractrices et réflectrices, et analysé les deux grandes familles de montures (équatoriale et alt-azimutale). Le choix d'une monture Dobsonienne pour notre projet — motivée par sa simplicité mécanique et son faible coût — impose en contrepartie une complexité logicielle importante : le suivi nécessite une commande différentielle sur deux axes simultanément, ce qui sera l'objet du chapitre 3.
+
+\clearpage
+
+% ---------------------------------
+% CHAPITRE 2
+% ---------------------------------
+\chapter{Cadre du Stage : Les Entreprises d'Accueil}
+
+\section{Introduction}
+La réalisation d'un projet mécatronique d'envergure tel qu'un télescope autoguidé exige des ressources matérielles, logicielles et humaines qu'un étudiant ne possède que rarement à titre individuel. C'est dans ce contexte que mon stage s'est déroulé en partenariat avec deux entités complémentaires implantées au Maroc : \textbf{Orange Digital Center (ODC)} et \textbf{Moussasoft}. La première a fourni l'environnement de prototypage et la communauté technique, la seconde a fourni les composants critiques et l'expertise en intégration électronique.  }
+
+   
+\section{Orange Digital Center Maroc}
+\subsection{Présentation générale}
+Orange Digital Center (ODC) est un programme mondial déployé par le groupe Orange en partenariat avec ses filiales locales, visant à accompagner la transformation numérique et soutenir l'innovation inclusive. Le réseau international compte aujourd'hui plus d'une vingtaine de centres en Afrique, au Moyen-Orient et en Europe. Au Maroc, ODC a établi des sites à Rabat, Casablanca, Tanger, Fès et Agadir, où s'est déroulé mon stage.
+ \begin{figure}[H]
+    \centering 
+    \includegraphics[width=0.7\linewidth]{logo_orangedigitalcenter.png}%
+    \caption{Orange Digital Center logo}
+    \end{figure}
+    
+\subsection{Les quatre piliers d'ODC}
+\begin{enumerate}[label=\textbf{\arabic*.}, leftmargin=*]
+    \item \textbf{École du Code} : formations gratuites au développement web, mobile, à l'intelligence artificielle et à la cybersécurité.
+    \item \textbf{FabLab Solidaire} : atelier de fabrication numérique ouvert aux porteurs de projet, équipé d'imprimantes 3D (FDM et SLA), de découpes laser CO\textsubscript{2}, de fraiseuses CNC et d'un matériel d'électronique professionnel.
+    \item \textbf{Orange Fab} : accélérateur de start-up offrant un accompagnement business et technologique.
+    \item \textbf{Orange Ventures} : fonds d'investissement en capital-risque pour les start-up matures.
+\end{enumerate}
+
+\subsection{ODC Agadir et apport au projet}
+Le site d'Agadir, situé au cœur du Souss-Massa, dispose d'un FabLab particulièrement bien équipé. Pour le projet de télescope autoguidé, les ressources suivantes ont été mises à disposition :
+\begin{itemize}
+    \item Imprimantes 3D \textbf{Creality Ender-3 V2} et \textbf{Prusa i3 MK3S} pour la fabrication des engrenages, du support laser et des pièces de raccordement des tubes.
+    \item Découpeuse laser pour la mise en forme des plateaux en plexiglass de la base azimutale et de l'axe d'altitude.
+    \item Postes de soudure et instruments de mesure (oscilloscopes Rigol, multimètres Fluke, alimentations de laboratoire).
+    \item Espace de travail collaboratif et accompagnement par les coachs techniques d'ODC.
+\end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\linewidth]{Screenshot 2026-05-19 114413.png}
+    \caption{Vue du FabLab d'Orange Digital Center Agadir.}
+    \label{fig:odc}
+\end{figure}
+
+\section{Moussasoft}
+\subsection{Histoire et fondateur}
+\textbf{Moussasoft} (\url{https://www.moussasoft.com/}) est une entreprise marocaine fondée par l'ingénieur-entrepreneur \textbf{Moussa Lhoussin}. À l'origine engagée dans le développement de solutions logicielles et matérielles sur-mesure, Moussasoft s'est progressivement positionnée comme un acteur de référence dans la distribution de composants électroniques et de kits éducatifs en robotique au Maroc, tout en continuant à concevoir et fabriquer des projets complexes pour des clients industriels et académiques.
+     \begin{figure}[H]
+    \centering 
+    \includegraphics[width=0.7\linewidth]{Screenshot 2026-05-19 113752.png}
+    \caption{Moussasoft logo}
+\end{figure}
+
+\subsection{Catalogue et services}
+Le catalogue de Moussasoft comprend des composants essentiels et de qualité pour les projets de mécatronique :
+\begin{itemize}
+    \item Cartes microcontrôleurs : \textbf{Arduino Uno, Nano, Mega 2560, Due, Teensy 4.1, ESP32, Raspberry Pi}.
+    \item Drivers moteurs : \textbf{A4988, DRV8825, L298N, TB6600}.
+    \item Moteurs : pas-à-pas (NEMA 8, 14, 17, 23), servomoteurs, moteurs DC.
+    \item Capteurs : IMU (MPU-6050, MPU-9250), GPS, ultrasoniques, optiques.
+    \item Affichages : LCD I2C, écrans OLED, écrans TFT.
+    \item Kits robotiques éducatifs et imprimantes 3D.
+    \item Conseil technique et support à la conception.
+\end{itemize}
+
+\subsection{Apport au projet du télescope}
+Pour ce projet, Moussasoft a apporté :
+\begin{enumerate}
+    \item La fourniture des deux cartes \textbf{Arduino Nano} et des drivers \textbf{A4988} configurés en microstepping 1/32.
+    \item Les moteurs pas-à-pas \textbf{NEMA 17} (1{,}8°/pas, couple nominal 0{,}4~N$\cdot$m) qui actionnent les deux axes.
+    \item Une expertise précieuse sur l'\textbf{isolation des masses} et la séparation logique/puissance, recommandation cruciale qui a conduit à l'architecture à deux Arduino communiquant par lignes logiques au lieu d'un système monolithique sensible aux parasites EM.
+    \item Le LCD I2C 16$\times$2 et le joystick analogique de la télécommande.
+\end{enumerate}
+
+
+
+\section{Synergie ODC et Moussasoft}
+La synergie entre les capacités de prototypage du FabLab d'Orange Digital Center et l'expertise en intégration électronique de Moussasoft a permis de mener à bien ce projet d'ingénierie complexe, alliant mécanique, électronique et développement logiciel. La complémentarité de ces deux structures illustre un écosystème marocain naissant et dynamique dans lequel makers, étudiants, entrepreneurs et industriels collaborent autour de l'innovation matérielle (\textit{hardware}). Sans cette synergie, la durée et le coût de réalisation de ce prototype auraient été significativement plus élevés, et la qualité du résultat final substantiellement inférieure.
+
+\section{Organisation du stage}
+Le stage s'est déroulé sur une période de plusieurs semaines, articulée selon les phases suivantes :
+\begin{table}[H]
+    \centering
+    \caption{Planning prévisionnel du stage.}
+    \begin{tabular}{|l|p{8cm}|c|}
+        \hline
+        \textbf{Phase} & \textbf{Activités} & \textbf{Durée (sem.)} \\
+        \hline
+        1 & État de l'art et étude bibliographique (optique, montures, codes existants) & 2 \\
+        2 & Conception CAO sur Onshape, dimensionnement optique et mécanique & 3 \\
+        3 & Prototypage : impression 3D, découpe laser, assemblage mécanique & 3 \\
+        4 & Câblage électronique, intégration des deux Arduino et drivers & 2 \\
+        5 & Développement logiciel (Arduino C++ et Python/Tkinter/Selenium) & 3 \\
+        6 & Tests sur le terrain, calibrage, observation & 2 \\
+        7 & Rédaction du rapport et préparation de la soutenance & 2 \\
+        \hline
+    \end{tabular}
+\end{table}
+
+\clearpage
+
+% ---------------------------------
+% CHAPITRE 3
+% ---------------------------------
+\chapter{Conception et Réalisation}
+\section{Introduction}
+
+Après avoir présenté les fondements théoriques des télescopes et des systèmes d’autoguidage dans le premier chapitre, puis décrit le cadre de réalisation du projet et les structures d’accueil dans le deuxième chapitre, ce troisième chapitre est consacré à la conception et à la réalisation pratique du télescope Dobsonien autoguidé.
+
+Cette partie constitue le cœur du projet puisqu’elle détaille l’ensemble des choix techniques ayant conduit à la réalisation du prototype. Elle couvre successivement l’étude optique ayant permis le dimensionnement du système d’observation, la conception mécanique de la monture et du corps du télescope, le développement de l’architecture électronique assurant la commande des moteurs ainsi que l’implémentation logicielle des différents modes de fonctionnement. Une attention particulière est portée aux calculs et aux modèles mathématiques utilisés pour le pointage et le suivi des objets célestes.
+
+L’objectif de ce chapitre est de présenter de manière méthodique les différentes étapes de conception, de fabrication et d’intégration qui ont permis de transformer les concepts théoriques étudiés précédemment en un système fonctionnel capable d’automatiser l’observation astronomique.
+
+\section{Outils et Environnement de travail}
+\subsection{Hardware}
+La nomenclature matérielle (BOM, Bill of Materials) constitue la première étape de tout projet d'ingénierie. Le tableau~\ref{tab:bom} en donne la liste exhaustive, ainsi que le rôle fonctionnel de chaque composant et son origine d'approvisionnement.
+
+\begin{table}[H]
+    \centering
+    \caption{Nomenclature matérielle complète (BOM).}
+    \label{tab:bom}
+    % This makebox wrapper forces the wide table to be perfectly centered on the page
+    \makebox[\textwidth][c]{
+        \begin{tabular}{|l|c|p{5cm}|l|}
+            \hline
+            \textbf{Composant} & \textbf{Qté} & \textbf{Rôle} & \textbf{Fournisseur} \\
+            \hline
+            Arduino Nano (ATmega328P) & 2 & Contrôle moteurs + interface/calcul & Moussasoft \\
+            Driver A4988 & 2 & Interface puissance steppers (1/32 µs) & Moussasoft \\
+            Moteur NEMA 17 (1,7 A, 0,4 N·m) & 2 & Actionneurs Az / Alt & Moussasoft \\
+            LCD I2C 16$\times$2 (PCF8574) & 1 & Affichage de l'IHM & Moussasoft \\
+            Joystick analogique 2 axes + SW & 1 & Contrôle manuel / navigation UI & Moussasoft \\
+            Boutons-poussoirs & 2 & Mode + Réglage date/heure & Moussasoft \\
+            Fin de course (limit switch) & 1 & Homing Az & FabLab ODC \\
+            Alimentation 12 V / 3 A & 1 & Énergie moteurs et logique & FabLab ODC \\
+            Fusible 3 A & 1 & Protection court-circuit & FabLab ODC \\
+            Plexiglass 5 mm & \approx\SI{1}{\meter\squared} & Plateaux Az et Alt & FabLab ODC \\
+            Filament PLA 1,75 mm & \approx1 kg & Engrenages, supports, boîtier & 3dware \\
+            Courroie crantée GT2 & 1 m & Couronne dentée azimutale & Moussasoft \\
+            Roulements à billes 608ZZ & 4 & Liaisons pivot Az / Alt & stock personnel \\
+            Lentille convergente +1 D & 1 & Objectif ($f=1$ m) & Optique locale \\
+            Lentille convergente +12 D & 1 & Oculaire ($f=83$ mm) & Optique locale \\
+            Tubes PVC $\varnothing$50 / 63 mm & 2 & Corps optique télescopique & stock personnel \\
+            Laser vert 5 mW & 1 & Pointage manuel et calibrage & aliexpress \\
+            Câbles, vis M3/M4, écrous & - & Visserie et câblage & bricoma \\
+            \hline
+        \end{tabular}
+    }
+\end{table}
+\begin{remarque}
+Le choix de \textbf{deux cartes Arduino Nano} (au lieu d'une seule plus puissante comme la Mega) n'est pas dicté par la limitation de RAM ou de Flash : il vise à \textit{isoler galvaniquement} le calculateur (Arduino n°1, dans la télécommande) de l'étage de puissance (Arduino n°2, près des drivers et moteurs). Les commutations rapides des A4988 (chopper à $\sim 50$ kHz et 12V) génèrent des transitoires sur les rails 5 V et la masse, capables de perturber la lecture analogique du joystick et l'écran LCD via le bus I2C.
+\end{remarque}
+\newpage
+\subsection{Software}
+Le projet repose sur une chaîne logicielle hétérogène couvrant la CAO, l'embarqué, et le \textit{scripting} de bureau :
+
+\begin{table}[H]
+    \centering
+    \caption{Chaîne logicielle utilisée.}
+    \label{tab:soft}
+    \begin{tabular}{|l|l|p{6cm}|}
+        \hline
+        \textbf{Outil} & \textbf{Version} & \textbf{Usage} \\
+        \hline
+        Onshape & Cloud 2024 & CAO 3D paramétrique (pièces et assemblages) \\
+        Ultimaker Cura & 5.x & Slicing pour impression 3D \\
+        Arduino IDE & 2.3 & Compilation du firmware C++ (cartes Nano) \\
+        Python & 3.11 & Interface graphique de bureau (PC) \\
+        Tkinter & built-in & Framework GUI Python \\
+        Selenium & 4.x & Automatisation du navigateur (scraping Stellarium) \\
+        ChromeDriver & 121.x & Pilote Selenium pour Chrome \\
+        PySerial & 3.5 & Communication série Python $\leftrightarrow$ Arduino \\
+        Pillow (PIL) & 10.x & Manipulation d'images (fond GUI) \\
+        AccelStepper & 1.64 & Bibliothèque Arduino pour steppers (rampes) \\
+        LCD-I2C & 2.3 & Bibliothèque pour écran I2C \\
+        Stellarium Web & en ligne & Planétaire de référence pour le mode online \\
+        Launch Virtual Serial Port & 9.x & Pont série virtuel pour debug \\
+        \hline
+    \end{tabular}
+\end{table}
+
+
+
+\section{Le Corps du Télescope (Body)}
+\subsection{L'Optique et ses Mathématiques}
+\subsubsection{Cadre théorique : l'équation de conjugaison}
+La conception optique du télescope a débuté par une analyse rigoureuse fondée sur les lois de l'optique géométrique. 
+%Le détail des dérivations est représenté schématiquement sur la figure de référence \texttt{optics\_maths.png} (cf. document annexe).
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\linewidth]{Screenshot 2026-05-19 131516.png}
+    \caption{Schéma des mathématiques optiques utilisées pour le dimensionnement }
+    \label{fig:optics_maths}
+\end{figure}
+
+L'équation fondamentale qui régit le comportement d'une lentille mince dans l'approximation paraxiale est la \textit{relation de conjugaison de Descartes} :
+\begin{equation}
+    \frac{1}{p'} - \frac{1}{p} = \frac{1}{f}
+    \label{eq:descartes}
+\end{equation}
+où $p$ est la position algébrique de l'objet (négatif s'il est en amont), $p'$ celle de l'image, et $f$ la distance focale de la lentille. Dans le cas astronomique où $p \to -\infty$ (l'objet est à l'infini), $1/p \to 0$ et l'image se forme exactement à $p' = f$ : c'est le plan focal.
+
+\subsubsection{Vergence et dioptrie}
+Les lentilles que nous avons acquises auprès d’un opticien local sont caractérisées commercialement par leur \textbf{vergence} $C$ (puissance optique), exprimée en dioptries (D, équivalent à $\text{m}^{-1}$) :
+\begin{equation}
+    C = \frac{1}{f} \quad \text{où } f \text{ est en mètres.}
+\end{equation}
+
+\begin{itemize}
+    \item \textbf{Objectif :} $C_{obj} = 1\,\text{D} \implies f_{obj} = \frac{1}{1} = 1\,\text{m} = 1000\,\text{mm}$.
+    \item \textbf{Oculaire :} $C_{oc} = 12\,\text{D} \implies f_{oc} = \frac{1}{12} \approx 0{,}0833\,\text{m} \approx 83\,\text{mm}$.
+\end{itemize}
+
+\subsubsection{Configuration képlérienne et grossissement}
+La configuration retenue est dite \textit{képlérienne} : deux lentilles convergentes séparées d'une distance égale à la somme de leurs focales :
+\begin{equation}
+    L_{\text{tube optique}} = f_{obj} + f_{oc} \approx 1000 + 83 = 1083\,\text{mm}
+\end{equation}
+Le grossissement angulaire est défini comme le rapport de l'angle apparent $\alpha'$ sous lequel l'observateur voit l'image à l'angle réel $\alpha$ sous lequel l'objet est vu à l'œil nu :
+\begin{equation}
+    G = \frac{\tan(\alpha')}{\tan(\alpha)} = \frac{f_{obj}}{f_{oc}} = \frac{1000}{83} \approx 12{,}05\times
+\end{equation}
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}[scale=0.95]
+        % Axe optique
+        \draw[dashed] (-7,0) -- (8,0);
+        % Lentille objectif
+        \draw[thick, blue, fill=blue!10] (-4,0) ellipse (0.15 and 1.8);
+        \node at (-4,-2.1) {\small Objectif $L_1$ ($f_1=1000$~mm)};
+        % Foyer image objectif
+        \filldraw[red] (1,0) circle (2pt);
+        \node[red] at (1,-0.3) {\small $F_1' = F_2$};
+        % Lentille oculaire
+        \draw[thick, blue, fill=blue!10] (1.5,0) ellipse (0.12 and 0.9);
+        \node at (1.5,1.2) {\small Oculaire $L_2$ ($f_2=83$~mm)};
+        % Rayons parallèles incidents (objet à l'infini)
+        \draw[red, thick] (-7,1.4) -- (-4,1.4);
+        \draw[red, thick] (-7,0.0) -- (-4,0.0);
+        \draw[red, thick] (-7,-1.4) -- (-4,-1.4);
+        % Convergence vers F'_1
+        \draw[red, thick] (-4,1.4) -- (1,0);
+        \draw[red, thick] (-4,-1.4) -- (1,0);
+        % Sortie de l'oculaire (rayons parallèles, plus écartés)
+        \draw[red, thick] (1,0) -- (1.5,0.85) -- (8,2.5);
+        \draw[red, thick] (1,0) -- (1.5,-0.85) -- (8,-2.5);
+        % Angles
+        \draw[->] (-6,0.1) arc (90:75:1);
+        \node at (-5.7,0.4) {\small $\alpha$};
+        \draw[->] (6,0.1) arc (90:55:1);
+        \node at (6.5,0.7) {\small $\alpha'$};
+    \end{tikzpicture}
+    \caption{Marche des rayons dans le télescope de Kepler : un faisceau parallèle (étoile à l'infini) entre sous un angle $\alpha$, converge au foyer commun $F'_1=F_2$, et ressort parallèle sous un angle $\alpha' = G \cdot \alpha$.}
+    \label{fig:kepler}
+\end{figure}
+
+\subsubsection{Discussion et choix de lentilles}
+Le grossissement modeste de $12\times$ a été choisi délibérément pour assurer un \textbf{champ de vision large} et lumineux, ce qui facilite considérablement le pointage initial des objets faibles et la phase de calibrage manuel. Augmenter le grossissement à $50\times$ ou $100\times$ aurait été techniquement possible avec un oculaire plus court (par exemple 20 mm $\Rightarrow$ $50\times$), mais aurait :
+\begin{enumerate}
+    \item Rétréci le champ apparent (loi inversement proportionnelle).
+    \item Réduit la luminosité de l'image (proportionnelle à $1/G^2$).
+    \item Amplifié les vibrations mécaniques et les aberrations.
+\end{enumerate}
+Le compromis $12\times$ se révèle adapté à un télescope de démonstration et de pointage avec un suivi GoTo non parfait. Une amélioration future consisterait à ajouter une \textbf{tourelle d'oculaires} interchangeables (par exemple 25 mm, 12 mm, 6 mm) pour offrir trois grossissements (40$\times$, 83$\times$, 167$\times$).
+
+\begin{table}[H]
+    \centering
+    \caption{Bilan optique théorique du télescope.}
+    \begin{tabular}{|l|c|}
+        \hline
+        \textbf{Paramètre} & \textbf{Valeur} \\
+        \hline
+        Focale objectif $f_{obj}$ & 1000 mm \\
+        Focale oculaire $f_{oc}$ & 83 mm \\
+        Vergence objectif & 1 D \\
+        Vergence oculaire & 12 D \\
+        Diamètre objectif $D$ & $\approx 50$ mm \\
+        Rapport $f/D$ & $f/20$ \\
+        Grossissement $G$ & $\approx 12\times$ \\
+        Champ apparent oculaire & $\sim 50^\circ$ \\
+        Champ réel & $\sim 4{,}2^\circ$ \\
+%        Magnitude limite calculée & $\sim 10{,}6$ \\
+        \hline
+    \end{tabular}
+\end{table}
+
+\begin{figure}[htb]
+	\centering
+	\includegraphics[width=\linewidth]{zoom ilustra.png}
+	\caption{Résultat du zoom obtenu}
+\end{figure}
+
+\subsection{La Base Azimutale (Z-Axis)}
+\subsubsection{Conception CAO}
+La base azimutale a été modélisée sur Onshape comme un assemblage paramétrique. Sa fonction est de permettre la rotation du télescope autour de l'axe vertical (azimut), tout en supportant le poids total de l'instrument ($\sim 5$ kg) et en garantissant un mouvement sans frottement excessif. La structure se compose de deux plateaux circulaires en plexiglass de 5 mm d'épaisseur et de 250 mm de diamètre, séparés et guidés par un système tribologique optimisé.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{Screenshot 2026-05-19 132845.png}
+    \caption{Vue isométrique de la base azimutale modélisée sur Onshape.}
+    \label{fig:base_az_cao}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{FDL0815M2DBA9WQ.jpg}
+    \caption{Vue éclatée de la base azimutale révélant l'agencement des roulements, du pignon moteur et de la courroie crantée.}
+    \label{fig:base_az_exploded}
+\end{figure}
+
+\subsubsection{Description mécanique}
+La base est composée des éléments suivants :
+\begin{itemize}
+    \item Deux plateaux en plexiglass découpés au laser ;
+    \item Une \textbf{courroie crantée GT2} collée à la cyanoacrylate sur le périmètre du plateau inférieur, agissant ainsi comme une grande couronne dentée flexible ;
+    
+    \item Trois \textbf{roulements à billes 608ZZ} disposés à $120^\circ$ les uns des autres, assurant la liaison glissière de révolution et la fluidité de rotation ;
+    \item Un \textbf{roulement central} qui prend la charge axiale de l'instrument et garantit la coaxialité.
+    \item Un \textbf{Moteur NEMA 17 }qui fournira la force permettant de faire tourner le disque supérieur. ;
+\end{itemize}
+
+\subsubsection{Calcul du rapport de réduction et résolution angulaire}
+La courroie crantée GT2 a un pas de 2 mm. Pour une circonférence du plateau de $\pi \cdot D_{\text{plat}} \approx \pi \cdot 250 \approx 785$ mm, le nombre total de dents de la couronne est :
+\begin{equation}
+    N_{\text{couronne}} = \frac{785}{2} \approx 393 \text{ dents}
+\end{equation}
+Le pignon moteur ayant $N_p = 11$ dents, le rapport de réduction est :
+\begin{equation}
+    i_{Az} = \frac{N_{\text{couronne}}}{N_p} = \frac{393}{11} \approx 35{,}7
+\end{equation}
+La résolution angulaire azimutale, pour un moteur de $1{,}8^\circ$/pas en microstepping $1/32$, devient :
+\begin{equation}
+    \Delta\theta_{Az} = \frac{1{,}8^\circ}{32 \times i_{Az}} = \frac{1{,}8^\circ}{32 \times 35{,}7} \approx 1{,}58 \times 10^{-3}\,{}^\circ \approx 5{,}7''
+\end{equation}
+Cette résolution théorique est meilleure que le pouvoir séparateur de l'optique , garantissant un pointage limité par l'optique et non par la mécanique.
+
+\subsubsection{Assemblage et calibrage}
+L'assemblage suit un protocole précis : (1) découpe laser des plateaux, (2) impression 3D des supports de roulements, (3) collage de la courroie sur le plateau inférieur, (4) montage des trois roulements latéraux et du roulement central, (5) positionnement du moteur NEMA 17 et engrènement du pignon.
+ %Un \textbf{fin de course} (limit switch) placé sur le pourtour permet, à la mise sous tension, d'effectuer une procédure de \textit{homing} qui établit l'origine angulaire (Az = $0^\circ$).
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\linewidth]{F6HED35M2DBA9XF.jpg}
+    \caption{la base azimutale assemblée.}
+    \label{fig:base_az_photo}
+\end{figure}
+
+\subsection{L'Axe d'Altitude (X-Axis)}
+\subsubsection{Conception CAO}
+L’axe d’altitude (rotation autour d’un axe horizontal) permet l’élévation du tube optique depuis l’horizon (0°) jusqu’au zénith (90°). Cet axe a été conçu autour d’un système d’engrenage en demi-cercle imprimé en 3D, contrairement à la base azimutale qui utilise une courroie. Ce choix est justifié par l’amplitude angulaire limitée requise (≈ 90°), ce qui permet l’utilisation d’une demi-couronne au lieu d’un système rotatif complet. 
+
+Par ailleurs, en raison d’une quantité limitée de plexiglas, la monture a été réalisée avec une hauteur réduite, ce qui a légèrement diminué la plage d’élévation du télescope. Toutefois, le système reste pleinement fonctionnel pour la majorité des observations astronomiques.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\linewidth]{04BB0BE9-6127-46EB-9F57-6F1394A6B058.png}
+    \caption{Modélisation CAO de l'axe d'altitude sur Onshape.}
+    \label{fig:alt_axis_cao}
+\end{figure}
+
+\subsubsection{Description mécanique}
+\begin{itemize}
+    \item Un \textbf{pignon de 11 dents} ($N_p = 11$) directement couplé à l'arbre du moteur NEMA 17 ;
+    \item Une \textbf{demi-couronne de 96 dents} ($N_c = 96$) imprimée à moitié pour économiser du filament, fixée latéralement au tube optique ;
+    \item trois \textbf{plaques de plexiglass pliées à chaud} formant le bâti latéral (côté Y) entre la base azimutale et l'axe d'altitude.
+\end{itemize}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.75\linewidth]{Screenshot 2026-05-20 223935.png}
+	\caption{demi-couronne de 96 dents et pignon de 11 dents }
+\end{figure}
+\subsubsection{Calculs mécaniques}
+Le rapport d'engrenage est :
+\begin{equation}
+    i_{Alt} = \frac{N_c}{N_p} = \frac{96}{11} \approx 8{,}727
+\end{equation}
+La résolution angulaire en altitude est donc :
+\begin{equation}
+    \Delta\theta_{Alt} = \frac{1{,}8^\circ}{32 \times i_{Alt}} = \frac{1{,}8^\circ}{32 \times 8{,}727} \approx 6{,}45 \times 10^{-3}\,{}^\circ \approx 23{,}2''
+\end{equation}
+Le couple disponible à la sortie de la réduction est :
+\begin{equation}
+    \tau_{Alt} = \tau_{\text{moteur}} \times i_{Alt} \times \eta_{\text{engrenage}} \approx 0{,}4 \times 8{,}727 \times 0{,}9 \approx 3{,}14\,\text{N}\cdot\text{m}
+\end{equation}
+ce qui est largement suffisant pour vaincre le couple résistant lié au poids du tube ($\sim 0{,}3$ N·m maximum à l'horizontale).
+
+\subsubsection{Pliage à chaud du plexiglass}
+Les plaques latérales du support ont été \textbf{pliées à chaud} à l'aide d'une résistance chauffante linéaire (\textit{strip heater}) selon des arêtes pré-dessinées. Le PMMA (polyméthacrylate de méthyle) possède une température de transition vitreuse $T_g \approx 105^\circ$C ; le pliage s'effectue typiquement à $130\text{-}160^\circ$C pour obtenir une plastification homogène sans bullage.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\linewidth]{Screenshot 2026-05-19 142830.png}
+    \caption{Pliage à chaud des plaques en plexiglass formant les supports latéraux.}
+    \label{fig:pliage}
+\end{figure}
+\begin{center}
+    \nopagebreak
+    \includegraphics[width=0.5\linewidth]{C2F5B503-419E-4ACD-AA7E-3CB462C0E001.png}
+    \captionof{figure}{la base azimutale et altitude assemblée.}
+    \label{fig:base_az_photo}
+\end{center}
+\subsection{Le Corps Télescopique : tubes et pièces 3D}
+\subsubsection{Tubes coulissants}
+Le corps optique du télescope est constitué de deux tubes en PVC concentriques, de diamètres extérieurs $\varnothing 63$ mm (tube extérieur portant l'objectif) et $\varnothing 50$ mm (tube intérieur portant l'oculaire). Le tube intérieur coulisse à l'intérieur du tube extérieur grâce à des \textbf{pièces de translation imprimées en 3D}, permettant ainsi la mise au point manuelle par variation continue de la distance objectif-oculaire autour du point théorique $L = f_{obj} + f_{oc} = 1083$ mm.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\linewidth]{Screenshot 2026-05-20 205020.png}
+    %Screenshot 2026-05-19 143858
+    \caption{Vue CAO des tubes télescopiques coulissants et de leurs pièces de raccordement imprimées en 3D.}
+    \label{fig:tubes_3d}
+\end{figure}
+\subsubsection{Pièces imprimées en 3D}
+Les pièces 3D essentielles incluent :
+\begin{itemize}
+    \item \textbf{Porte-objectif} : bague venant maintenir la lentille de 1 D dans l'extrémité du tube extérieur.
+    \item \textbf{Porte-oculaire} : à l'extrémité opposée du tube intérieur.
+    \item \textbf{Bagues de guidage} : deux bagues annulaires fendues qui assurent le centrage des tubes l'un dans l'autre.
+    %\item \textbf{Support de laser vert} : pince imprimée 3D fixée sur le tube extérieur pour le pointage manuel.
+    %\item \textbf{Pignons 11 dents} (Az et Alt) et \textbf{demi-couronne 96 dents} (Alt) déjà décrits.
+\end{itemize}
+
+Les paramètres d'impression utilisés étaient : matériau PLA, hauteur de couche 0{,}2 mm, remplissage $25\%$, 3 périmètres, vitesse 60 mm/s. Une tolérance d'ajustement de 0{,}3 mm a été ajoutée aux contacts mobiles pour compenser le retrait thermique.
+
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.75\linewidth]{image.png}
+	\caption{Porte-objectif et oculaire }
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{vue tot telescope body.png}
+	\caption{vue interne du corps du télescope}
+\end{figure}
+
+
+\subsection{Assemblage final du télescope}
+L'assemblage final intègre l'ensemble des sous-systèmes décrits ci-dessus : la base azimutale supporte les deux supports latéraux en plexiglass pliés, eux-mêmes portant l'axe d'altitude et la demi-couronne dentée. Le tube optique (objectif + oculaire avec leurs supports) est fixé à cet axe. 
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\linewidth]{Screenshot 2026-06-09 220752.png}
+    \caption{Vue d'ensemble du télescope assemblé.}
+    \label{fig:telescope_assemble}
+\end{figure}
+
+
+\section{Les circuits:}
+\subsection{Circuit 1 : Contrôle des moteurs}
+\subsubsection{Architecture du circuit de puissance et de commande}
+
+Le circuit n°1 est l'étage de puissance et de contrôle des deux moteurs pas-à-pas. 
+Il s'articule autour d'un Arduino Nano (le « cerveau moteur ») qui pilote deux drivers A4988 via leurs broches \texttt{STEP} et \texttt{DIR}. 
+L'alimentation 12 V traverse un fusible 4 A de protection contre les courts-circuits.
+
+\begin{figure}[htb]
+	\centering
+	\includegraphics[width=\linewidth]{jj.drawio.png}
+    \caption{Schéma synoptique simplifié du circuit n°1 (contrôle des moteurs)}
+\end{figure}
+
+\subsubsection{Microstepping et précision}
+Les drivers A4988 sont réglés sur un microstepping de $1/32$ via les broches \texttt{MS1, MS2, MS3} mises à \texttt{HIGH} plus deux condensateurs pour assurer une tension stable pour eux , \textbf{voir l’annexe pour le circuit détaillé}.\\
+ Ce mode subdivise chaque pas mécanique du moteur en 32 micro-pas, ce qui :
+\begin{enumerate}
+    \item Augmente la résolution angulaire d'un facteur 32 ;
+    \item Lisse les transitions, réduisant les vibrations et le bruit acoustique ;
+    
+\begin{table}[H]
+    \centering
+    \caption{Affectation des broches de l'Arduino Nano n°2 (contrôle moteurs).}
+    \begin{tabular}{|l|l|l|}
+        \hline
+        \textbf{Broche} & \textbf{Fonction} & \textbf{Description} \\
+        \hline
+        D2 & STEP1 & Impulsions pas moteur Az \\
+        D3 & DIR1 & Sens de rotation moteur Az \\
+        D4 & DIR2 & Sens de rotation moteur Alt \\
+        D5 & STEP2 & Impulsions pas moteur Alt \\
+        D6 & LIMIT\_SW & Fin de course (homing) \\
+        D10 & PIN\_JOY & Indication mode joystick (voir les parties suivantes) \\
+        D11 & PIN\_ONLINE & Indication mode en ligne (voir les parties suivantes) \\
+        A0 & JOY\_X & Lecture analogique X \\
+        A1 & JOY\_Y & Lecture analogique Y \\
+        RX/TX & UART & Liaison série vers Arduino n°1 \\
+        \hline
+    \end{tabular}
+\end{table}
+\subsection{Circuit 2 : la télécommande}
+\subsubsection{Le Boîtier de Commande (Remote Controller)}
+\susubbsection{Justification de l'architecture à deux Arduino}
+Architecture de la télécommande et de la communication
+
+Le système de contrôle du télescope nécessite une interface intuitive permettant à l’opérateur de basculer entre les modes de fonctionnement, de configurer les paramètres, d’ajuster manuellement le pointage via un joystick et de sélectionner des objets célestes à partir d’un catalogue.
+
+Dans un premier temps, ces fonctions avaient été intégrées directement sur la carte de contrôle principale. Cependant, au cours du développement, il est apparu que la centralisation à la fois de l’interface utilisateur et de la charge de calcul sur un seul microcontrôleur n’était pas une approche viable. En effet, l’Arduino principal était déjà sollicité par des traitements mathématiques intensifs  transformations de coordonnées, calculs de pointage et contrôle en temps réel des moteurs  ne laissant pas suffisamment de ressources pour gérer les entrées utilisateur de manière fluide et fiable.\\
+
+Pour résoudre ce problème, un second Arduino \textbf{(arduino n°1)} a été introduit, dédié exclusivement à l'interface homme-machine et aux traitements mathématiques. Cette unité prend en charge les entrées du joystick, les boutons de navigation ainsi que l'afficheur LCD 16×2 fournissant un retour en temps réel à l'opérateur. Il agit comme un processeur frontal : il capte les intentions de l'utilisateur, effectue les calculs de précision nécessaires, et transmet les commandes résultantes à l'Arduino principal, lequel reste entièrement dédié à la gestion de la puissance et à la commande des moteurs.\\
+Les deux Arduinos communiquent via une liaison série UART. Afin de garantir l’intégrité de cette communication, un isolateur numérique (ISO7221) est placé sur les lignes UART côté carte principale. La télécommande est alimentée par une batterie indépendante, tandis que la carte principale est alimentée par l’alimentation centrale. Ainsi, les deux masses ne sont jamais reliées électriquement : malgré une communication continue entre les deux Arduinos, ils restent électriquement isolés.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.55\linewidth]{iso.png}
+	\caption{isolateur numérique (ISO7221)}
+\end{figure}
+
+Cette isolation permet d’empêcher la propagation des parasites, fluctuations de masse et transitoires de commutation générés par les drivers de moteurs pas-à-pas A4988 vers l’électronique de la télécommande. Elle protège ainsi à la fois la communication UART et le bus I2C de l’écran LCD, particulièrement sensible aux perturbations et pouvant se bloquer complètement à la suite d’un seul bit corrompu.
+\begin{enumerate}
+    \item Les A4988 hachent le courant moteur à environ 50 kHz, créant des transitoires de tension sur la masse capables de fausser la lecture analogique du joystick (10 bits, $\sim 5$ mV de résolution) ;
+    \item Le bus I2C de l'écran LCD est très sensible aux glitches : un seul bit erroné suffit à figer l'affichage ou à corrompre la communication.
+\end{enumerate}
+\newpage
+%\textbf{Circuit 2 : la télécommande}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{second ar.drawio.png}
+	\caption{Schéma synoptique simplifié du circuit n°2 (Télécommande)}
+\end{figure}
+
+L'Arduino Nano n°1 intègre :
+\begin{itemize}
+    \item Un écran \textbf{LCD I2C 16$\times$2} (adresse 0x27) via les broches A4/A5 (SDA/SCL) ;
+    \item Un \textbf{joystick analogique} avec axes X (A1) et Y (A0), et bouton-poussoir intégré (D12) ;
+    \item Deux \textbf{boutons-poussoirs} : « Mode » (D11) pour basculer entre Normal / Réglage, et « Scope » (D10) pour basculer entre les sous-modes Offline / Online / Joystick ;
+    \item Deux \textbf{sorties logiques} : D8 (mode en ligne) et D9 (mode joystick) routées vers l'Arduino n°2, \textbf{\color{red}{Ces éléments ne sont pas représentés ici ; se référer à l’annexe pour les schémas détaillés.}}
+\end{itemize}
+
+\subsubsection{CAO et impression du boîtier de la télécommande}
+Le boîtier de télécommande a été modélisé sur Onshape en deux demi-coques s'assemblant par quatre vis M3. Les découpes en façade épousent précisément l'écran LCD, le joystick et les boutons. Un passe-câble à l'arrière laisse sortir le câble blindé de 8 conducteurs vers le télescope.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\linewidth]{Screenshot 2026-06-06 140631.png}
+    \caption{Modélisation CAO du boîtier de télécommande.}
+    \label{fig:remote_cad}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\linewidth]{Screenshot 2026-06-06 141017.png}
+    \caption{Boîtier de télécommande finalisé, imprimé en PLA.}
+    \label{fig:remote_photo}
+\end{figure}
+
+\section{Programmation et Modes de Fonctionnement}
+
+\subsection{Organigramme général du système}
+La programmation embarquée et logicielle du télescope orchestre l'ensemble des sous-systèmes décrits précédemment. L'organigramme global du firmware du télescope est présenté ci-dessous :
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}[node distance=1.3cm, scale=0.78, transform shape]
+        \node (start) [startstop] {Mise sous tension};
+        \node (init) [process, below of=start] {Initialisation LCD, GPIO, Série};
+        \node (splash) [process, below of=init] {Affichage « AK-space / AK-scope »};
+        \node (mode) [decision, below of=splash, yshift=-0.5cm] {Bouton Mode ?};
+        \node (set) [process, right of=mode, xshift=4.5cm] {Mode Réglage Date/Heure};
+        \node (scope) [process, below of=mode, yshift=-0.8cm] {Mode Scope};
+        \node (off) [decision, below of=scope, yshift=-0.5cm] {Sous-mode ?};
+        \node (offline) [process, left of=off, xshift=-3cm] {Hors-Ligne};
+        \node (online) [process, below of=off, yshift=-0.5cm] {En Ligne};
+        \node (joy) [process, right of=off, xshift=3cm] {Joystick};
+        \node (calc) [process, below of=offline] {Calcul Alt/Az};
+        \node (serial) [process, below of=online] {Commande logicielle};
+        \node (raw) [process, below of=joy] {Lecture X/Y};
+        %----------------------------------
+        % Modifications ici
+        %----------------------------------
+        \node (motor) [process, below of=serial, yshift=-0.5cm] {Commande Moteurs};
+        \node (suivi) [startstop, below of=motor, yshift=-0.5cm] {Mode suivi};
+        
+        \draw [arrow] (start) -- (init);
+        \draw [arrow] (init) -- (splash);
+        \draw [arrow] (splash) -- (mode);
+        \draw [arrow] (mode) -- node[above]{oui} (set);
+        \draw [arrow] (mode) -- node[right]{non} (scope);
+        \draw [arrow] (scope) -- (off);
+        \draw [arrow] (off) -- (offline);
+        \draw [arrow] (off) -- (online);
+        \draw [arrow] (off) -- (joy);
+        \draw [arrow] (offline) -- (calc);
+        \draw [arrow] (online) -- (serial);
+        \draw [arrow] (joy) -- (raw);
+        
+        % Connexions des 3 branches vers Commande Moteurs
+        \draw [arrow] (calc.south) |- (motor.west);
+        \draw [arrow] (serial) -- (motor);
+        \draw [arrow] (raw.south) |- (motor.east);
+        
+        % Connexion finale vers Suivi mode
+        \draw [arrow] (motor) -- (suivi);
+    \end{tikzpicture}
+    \caption{Organigramme global du firmware de télescope.}
+    \label{fig:organigramme_global}
+\end{figure}
+
+\subsection{Le Mode Hors-Ligne (Offline) : Astronomie Sphérique}
+\begin{remarque}{Algorithme astronomique}
+Ce mode garantit l'autonomie du télescope en "pleine brousse", sans PC. Le microcontrôleur embarque les coordonnées équatoriales ($RA, Dec$) d'un catalogue de 20 étoiles. Les équations de la trigonométrie sphérique sont encodées pour convertir ces coordonnées absolues en coordonnées horizontales ($Alt, Az$) au point de l'observateur.
+\end{remarque}
+
+\subsubsection{Représentation de la sphère céleste et triangle de position}
+Pour bien comprendre les équations qui suivent, il est indispensable de visualiser la \textbf{sphère céleste}, sphère idéale de rayon infini sur laquelle sont projetés les astres. Deux systèmes de coordonnées coexistent :
+\begin{itemize}
+    \item Le système \textbf{équatorial} $(RA, Dec)$, lié au plan équatorial terrestre prolongé. L'ascension droite $RA$ mesure l'angle dans le plan équatorial à partir du point vernal ($\gamma$), la déclinaison $Dec$ mesure la latitude céleste à partir de l'équateur.\textbf{ ce système est universel et indépendant de la position de l’observateur sur Terre}
+    \item Le système \textbf{horizontal} $(Alt, Az)$, lié à l'observateur. L'altitude $Alt$ mesure la hauteur au-dessus de l'horizon, l'azimut $Az$ se compte depuis le Nord en allant vers l'Est. Ce système est \textit{local}.
+\end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}[scale=1.4]
+        % Sphère
+        \draw[thick] (0,0) circle (2.5);
+        % Equateur (ellipse)
+        \draw[blue, dashed] (0,0) ellipse (2.5 and 0.5);
+        \node[blue] at (2.9,0) {\small Équateur};
+        % Horizon (ellipse inclinée)
+        \begin{scope}[rotate=-30]
+            \draw[red, dashed] (0,0) ellipse (2.5 and 0.5);
+        \end{scope}
+        \node[red] at (-2.3,-1.3) {\small Horizon};
+        % Pôle céleste
+        \filldraw[black] (0,2.5) circle (1.5pt);
+        \node[above] at (0,2.5) {P (Pôle céleste)};
+        % Zénith
+        \filldraw[black] (1.25,2.17) circle (1.5pt);
+        \node[right] at (1.25,2.17) {Z (Zénith)};
+        % Étoile S
+        \filldraw[orange] (1.5,0.8) circle (2.5pt);
+        \node[orange, right] at (1.5,0.8) {S (étoile)};
+        % Triangle PZS
+        \draw[thick, magenta] (0,2.5) -- (1.25,2.17);
+        \draw[thick, magenta] (1.25,2.17) -- (1.5,0.8);
+        \draw[thick, magenta] (1.5,0.8) -- (0,2.5);
+        % Annotations
+        \node[magenta] at (0.3,2.4) {\tiny PZ};
+        \node[magenta] at (1.6,1.5) {\tiny ZS=$90^\circ-Alt$};
+        \node[magenta] at (0.4,1.5) {\tiny PS=$90^\circ-Dec$};
+        % Observateur au centre
+        \filldraw[gray] (0,0) circle (1pt);
+        \node[below] at (0,-0.1) {\small O};
+    \end{tikzpicture}
+    \caption{Sphère céleste et triangle de position sphérique $PZS$ liant le pôle céleste $P$, le zénith $Z$ et l'étoile $S$. Le côté $PZ = 90^\circ - \phi$ (colatitude), $PS = 90^\circ - Dec$ (distance polaire), $ZS = 90^\circ - Alt$ (distance zénithale). L'angle au sommet $P$ est l'angle horaire $HA$.}
+    \label{fig:sphere_celeste}
+\end{figure}
+
+L'application des \textbf{formules fondamentales de la trigonométrie sphérique} (analogues de la loi des cosinus et des sinus) au triangle $PZS$ permet de dériver directement les équations de passage entre les deux systèmes, présentées ci-dessous.
+
+\paragraph{1. Temps Universel (UT) et Période Julienne ($d$) :}
+L'heure locale $(h, m, s)$ est décimalisée :
+\begin{equation}
+    UT = h + \frac{m}{60} + \frac{s}{3600} \text{ (heures)}
+\end{equation}
+Le nombre de jours $d$ depuis l'époque J2000 est calculé en tenant compte des bissextiles :
+\begin{equation}
+    d = 367 \cdot Y - \left\lfloor \frac{7 \cdot \left(Y + \lfloor \frac{M+9}{12} \rfloor\right)}{4} \right\rfloor + \left\lfloor \frac{275 \cdot M}{9} \right\rfloor + D - 730530
+\end{equation}
+
+\paragraph{2. Le Temps Sidéral :}
+L'angle de l'équinoxe de printemps (GST) est déterminé puis ajusté par la Longitude locale (en degrés divisés par 15) pour obtenir le LST :
+\begin{align}
+    GST &= 6.697374558 + 0.0657098244 \cdot d + 1.0027379 \cdot UT \pmod{24} \\
+    LST &= GST + \frac{\text{Longitude}}{15} \pmod{24}
+\end{align}
+
+\paragraph{3. L'Angle Horaire ($HA$) et Matrice de Transformation :}
+L'angle horaire définit la position de l'astre par rapport au méridien :
+\begin{equation}
+    HA = (LST - RA) \times 15 \pmod{360} \quad \text{(en degrés)}
+\end{equation}
+La projection sphérique donne finalement l'Altitude et l'Azimut de la cible :
+\begin{align}
+    \sin(Alt) &= \sin(Dec)\sin(Lat) + \cos(Dec)\cos(Lat)\cos(HA) \label{eq:alt} \\
+    \cos(Az) &= \frac{\sin(Dec) - \sin(Alt)\sin(Lat)}{\cos(Alt)\cos(Lat)} \label{eq:az}
+\end{align}
+L'Azimut est rectifié à $Az = 360^\circ - Az$ si $\sin(HA) > 0$.
+
+\subsubsection{Dérivation des équations de transformation}
+Les deux équations \eqref{eq:alt} et \eqref{eq:az} ne sont pas postulées : elles découlent directement de l'application de la \textit{formule fondamentale de la trigonométrie sphérique} au triangle $PZS$.
+
+\textbf{Loi des cosinus sphérique :} pour un triangle sphérique de côtés $a, b, c$ et d'angles opposés $A, B, C$, on a :
+\begin{equation}
+    \cos(a) = \cos(b)\cos(c) + \sin(b)\sin(c)\cos(A)
+\end{equation}
+En posant $a = ZS = 90^\circ - Alt$, $b = PZ = 90^\circ - \phi$, $c = PS = 90^\circ - Dec$ et $A = HA$ (angle au pôle), il vient :
+\begin{align}
+    \cos(90^\circ - Alt) &= \cos(90^\circ - \phi)\cos(90^\circ - Dec) + \sin(90^\circ - \phi)\sin(90^\circ - Dec)\cos(HA) \\
+    \sin(Alt) &= \sin(\phi)\sin(Dec) + \cos(\phi)\cos(Dec)\cos(HA)
+\end{align}
+ce qui démontre l'équation \eqref{eq:alt}. De même, en appliquant la loi des cosinus sur le côté $PS$, on obtient l'équation \eqref{eq:az}.
+
+\subsubsection{Catalogue d'étoiles embarqué}
+Le firmware Arduino embarque les coordonnées équatoriales de 20 étoiles brillantes. Ces coordonnées (ascension droite et déclinaison) constituent un catalogue de référence supposé fixe à l’échelle humaine, car elles décrivent la position des étoiles dans le référentiel céleste. Cependant, en réalité, ces valeurs évoluent lentement au cours du temps en raison de la précession des équinoxes et du mouvement propre des étoiles.
+
+Dans notre cas, ce catalogue reste suffisamment précis pour garantir un pointage correct sur une durée d’environ 10 à 15 ans. Au-delà de cette période, une mise à jour des coordonnées devient nécessaire afin de conserver la précision des calculs et la cohérence avec l’époque astronomique de référence. Le tableau 3.5 donne la liste complète.
+
+\begin{longtable}{|l|c|c|c|}
+    \caption{Catalogue des 20 étoiles embarquées dans le firmware.}\label{tab:catalogue}\\
+    \hline
+    \textbf{Étoile} & \textbf{RA (h)} & \textbf{Dec (°)} & \textbf{Constellation} \\
+    \hline
+    \endfirsthead
+    \hline
+    \textbf{Étoile} & \textbf{RA (h)} & \textbf{Dec (°)} & \textbf{Constellation} \\
+    \hline
+    \endhead
+    Sirius & 6,7525 & -16,7161 & Grand Chien \\
+    Canopus & 6,3992 & -52,6957 & Carène \\
+    Arcturus & 14,2610 & +19,1825 & Bouvier \\
+    Vega & 18,6156 & +38,7837 & Lyre \\
+    Capella & 5,2782 & +45,9979 & Cocher \\
+    Rigel & 5,2423 & -8,2016 & Orion \\
+    Procyon & 7,6550 & +5,2250 & Petit Chien \\
+    Achernar & 1,6286 & -57,2368 & Éridan \\
+    Betelgeuse & 5,9195 & +7,4071 & Orion \\
+    Hadar & 14,0637 & -60,3729 & Centaure \\
+    Altaïr & 19,8463 & +8,8683 & Aigle \\
+    Aldebaran & 4,5987 & +16,5092 & Taureau \\
+    Antarès & 16,4901 & -26,4320 & Scorpion \\
+    Spica & 13,4199 & -11,1613 & Vierge \\
+    Pollux & 7,7553 & +28,0262 & Gémeaux \\
+    Fomalhaut & 22,9608 & -29,6222 & Poisson Austral \\
+    Deneb & 20,6905 & +45,2803 & Cygne \\
+    Régulus & 10,1395 & +11,9672 & Lion \\
+    Castor & 7,5766 & +31,8884 & Gémeaux \\
+    Alnaïr & 22,1372 & -46,9601 & Grue \\
+    \hline
+\end{longtable}
+
+\subsubsection{Organigramme du mode hors-ligne}
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}[node distance=1.4cm, scale=0.8, transform shape]
+        \node (start) [startstop] {Entrée Mode Hors-Ligne};
+        \node (scroll) [process, below of=start] {Scroll Joystick parmi 20 étoiles};
+        \node (select) [decision, below of=scroll, yshift=-0.3cm] {Joystick SW ?};
+        \node (gst) [process, below of=select, yshift=-0.3cm] {Calcul GST};
+        \node (lst) [process, below of=gst] {Calcul LST};
+        \node (ha) [process, below of=lst] {Calcul HA};
+        \node (altaz) [process, below of=ha] {Calcul Alt, Az};
+        \node (disp) [process, below of=altaz] {Affichage LCD};
+        \node (cmd) [startstop, below of=disp] {Commande moteurs};
+        \draw [arrow] (start) -- (scroll);
+        \draw [arrow] (scroll) -- (select);
+        \draw [arrow] (select) -- node[right]{oui} (gst);
+        \draw [arrow] (select.west) to[bend left=60] node[left]{non} (scroll.west);
+        \draw [arrow] (gst) -- (lst);
+        \draw [arrow] (lst) -- (ha);
+        \draw [arrow] (ha) -- (altaz);
+        \draw [arrow] (altaz) -- (disp);
+        \draw [arrow] (disp) -- (cmd);
+    \end{tikzpicture}
+    \caption{Organigramme du mode hors-ligne.}
+    \label{fig:org_offline}
+\end{figure}
+
+\subsubsection{Extrait de code Arduino : fonctions de calcul}
+\begin{lstlisting}[language=C++, caption={Fonctions \texttt{calculateGST}, \texttt{calculateLST} et \texttt{calculateAltAz}.}]
+float calculateGST(int year, int month, int day, int hour, int minute, int second) {
+  float UT = hour - 7 + minute - 15 / 60.0 + second / 3600.0;
+  int yTemp = year + (month + 9) / 12;
+  float d = 367 * year - (7 * yTemp) / 4 + (275 * month) / 9 + day - 730530;
+  float GST = 6.697374558 + 0.06570982441908 * d + 1.00273790935 * UT;
+  GST = fmod(GST, 24.0);
+  return GST;
+}
+
+float calculateLST(float gst, float longitude) {
+  float LST = gst + longitude / 15.0;
+  LST = fmod(LST, 24.0);
+  return LST;
+}
+
+void calculateAltAz(float ra, float dec, float lat, float lst,
+                    float &alt, float &az) {
+  float HA = fmod((lst * 15.0 - ra * 15.0), 360.0);
+  if (HA < 0) HA += 360.0;
+  HA  = degreesToRadians(HA);
+  dec = degreesToRadians(dec);
+  lat = degreesToRadians(lat);
+  float sinAlt = sin(dec)*sin(lat) + cos(dec)*cos(lat)*cos(HA);
+  alt = asin(sinAlt);
+  float cosAz = (sin(dec) - sin(alt)*sin(lat)) / (cos(alt)*cos(lat));
+  cosAz = constrain(cosAz, -1, 1);
+  az = acos(cosAz);
+  alt = radiansToDegrees(alt);
+  az  = radiansToDegrees(az);
+  if (sin(HA) > 0) az = 360.0 - az;
+}
+\end{lstlisting}
+
+\subsubsection{Cas d'Étude Pratique : Pointage de l'étoile Vega}
+Considérons l'étoile Capella ($RA = 5{,}2782$ h, $Dec = +45{,}9979^\circ$) 
+observée depuis Agadir ($Lat = 30{,}4^\circ$N, $Long = -9{,}6^\circ$). 
+Pour le jour $d = 10995$, le calcul donne une 
+Altitude $Alt \approx 73{,}97^\circ$ et un Azimut $Az \approx 347{,}99^\circ$.
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}[scale=1]
+        \begin{polaraxis}[
+            xtick={0,30,60,90,120,150,180,210,240,270,300,330},
+            xticklabels={N $0^\circ$,$30^\circ$,$60^\circ$,E $90^\circ$,
+                         $120^\circ$,$150^\circ$,S $180^\circ$,$210^\circ$,
+                         $240^\circ$,W $270^\circ$,$300^\circ$,$330^\circ$},
+            ytick={0,30,60,90},
+            yticklabels={Zénith,$60^\circ$,$30^\circ$,$0^\circ$},
+            y dir=reverse,
+            ymin=0, ymax=90,
+            grid=both,
+            yticklabel style={rotate=45, anchor=south west, font=\small}
+        ]
+        % Capella: Alt=73.97°, Az=347.99°
+        % r = 90 - Alt = 16.03° (proche du zénith)
+        \addplot[mark=*, blue, mark size=3pt] 
+            coordinates {(347.99, 16.03)} 
+            node[pin={[pin distance=1.2cm, pin edge={blue,thick}]
+                      60:{{\color{blue}Capella}}}] {};
+        \end{polaraxis}
+    \end{tikzpicture}
+    \caption{Représentation polaire locale (Azimut, Altitude radiale vers le 
+    centre) de la cible Capella. Alt $\approx 73.97^\circ$, 
+    Az $\approx 347.99^\circ$, observée depuis Agadir 
+    (Lat $= 30.4^\circ$N, Long $= -9.6^\circ$) pour $d = 10995$.}
+\end{figure}
+
+\subsection{Le Mode En Ligne (Online) : Intégration Python \& Stellarium}
+\subsubsection{Architecture logicielle}
+Le mode en ligne offre l'accès à une base de données quasi infinie (plus de 600\,000 objets célestes) en exploitant le \textbf{planétaire Stellarium Web}. La chaîne logicielle complète est la suivante :
+\begin{enumerate}
+    \item L'utilisateur ouvre l'interface graphique Python sur son PC ;
+    \item Il sélectionne un port série actif (scan automatique des ports COM1 à COM256) et un objet céleste dans une liste de 50 cibles ;
+    \item Un \textit{thread} dédié lance ChromeDriver (Selenium) en mode \texttt{headless}, charge \url{https://stellarium-web.org/}, ferme la pop-up de bienvenue, saisit le nom de l'objet dans la barre de recherche, et clique sur le résultat ;
+    \item Les éléments DOM de classe \texttt{radecVal} contenant les coordonnées horizontales (degrés, minutes, secondes) sont extraits ;
+    \item Le résultat formaté est envoyé par UART (115200 baud) à l'Arduino n°2 qui le décode et commande les moteurs.
+\end{enumerate}
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}[scale=0.85, every node/.style={font=\small}]
+        \node[draw, fill=blue!10, rounded corners] (user) at (0,4) {Utilisateur};
+        \node[draw, fill=green!10, rounded corners] (gui) at (3,4) {GUI Tkinter};
+        \node[draw, fill=orange!15, rounded corners] (sel) at (6,4) {Selenium};
+        \node[draw, fill=red!10, rounded corners] (stel) at (9,4) {Stellarium};
+        \node[draw, fill=yellow!15, rounded corners] (ard) at (12,4) {Arduino \#2};
+        \draw[thick] (user) -- (user|-0,0);
+        \draw[thick] (gui) -- (gui|-0,0);
+        \draw[thick] (sel) -- (sel|-0,0);
+        \draw[thick] (stel) -- (stel|-0,0);
+        \draw[thick] (ard) -- (ard|-0,0);
+        % Messages
+        \draw[->, thick] (0,3.5) -- node[above]{\tiny Sélection objet}(3,3.5);
+        \draw[->, thick] (3,3) -- node[above]{\tiny GET /} (6,3);
+        \draw[->, thick] (6,2.5) -- node[above]{\tiny Search + Click} (9,2.5);
+        \draw[<-, thick] (6,2) -- node[above]{\tiny DOM radecVal} (9,2);
+        \draw[<-, thick] (3,1.5) -- node[above]{\tiny (alt, az)} (6,1.5);
+        \draw[->, thick] (3,1) -- node[above]{\tiny UART 115200} (12,1);
+    \end{tikzpicture}
+    \caption{Diagramme de séquence du mode en ligne (Online).}
+    \label{fig:seq_online}
+\end{figure}
+
+\subsubsection{Interface graphique Tkinter}
+L'interface a été conçue avec Tkinter et utilise un fond animé (la Voie Lactée) défilant lentement pour une expérience utilisateur immersive. Les widgets principaux sont :
+\begin{itemize}
+    \item Une \texttt{Combobox} listant les ports série détectés (\texttt{serial\_ports()}) ;
+    \item Une \texttt{Combobox} listant les 50 objets célestes prédéfinis ;
+    \item Un \texttt{Button} « Search » déclenchant la recherche dans un thread séparé pour ne pas figer l'interface ;
+    \item Une \texttt{ScrolledText} affichant les coordonnées résultantes.
+\end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\linewidth]{F51UJS4M3SR4LW2.png}
+    \caption{Capture d'écran de l'interface Python (Tkinter).}
+    \label{fig:gui}
+\end{figure}
+
+\subsubsection{Extraction Selenium des angles}
+\begin{lstlisting}[language=Python, caption={Extraction Selenium de l'Altitude et de l'Azimut.}]
+radec_vals = driver.find_elements(By.CLASS_NAME, "radecVal")
+# Indices 6-8 : altitude (deg, min, sec)
+alt_angle = radec_vals[6].text.strip()
+alt_min   = radec_vals[7].text.strip()
+alt_sec   = radec_vals[8].text.strip()
+# Indices 9-11 : azimut (deg, min, sec)
+az_angle  = radec_vals[9].text.strip()
+az_min    = radec_vals[10].text.strip()
+az_sec    = radec_vals[11].text.strip()
+# Formatage et envoi série
+result = f"{az_angle} {az_min} {az_sec}\n{alt_angle} {alt_min} {alt_sec}\n"
+arduino.write(bytes(result, 'utf-8'))
+time.sleep(0.05)
+\end{lstlisting}
+
+\subsubsection{Analyse ligne par ligne du code Python}
+Le code Python comporte des fonctions clés que nous analysons ici (puisque le source original est peu commenté) :
+\begin{itemize}
+    \item \texttt{serial\_ports()} : itère sur les noms \texttt{COM1} à \texttt{COM256} (sous Windows), tente de les ouvrir via \texttt{serial.Serial(port)} et conserve uniquement ceux disponibles. Robuste face aux ports verrouillés ou inexistants grâce à un bloc \texttt{try/except (OSError, SerialException)}.
+    
+    \item \texttt{create\_widgets()} : assemble les widgets Tkinter dans un \texttt{Frame} centré, avec un style sombre (fonds bleu marine \texttt{\#151f36}).
+    \item \texttt{start\_search()} : lance \texttt{search\_object()} dans un \texttt{Thread} daemon pour préserver la réactivité de l'interface.
+    \item \texttt{search\_object()} : (1) configure ChromeDriver headless, (2) attend que le DOM soit chargé via \texttt{WebDriverWait}, (3) ferme la pop-up de bienvenue si elle apparaît, (4) saisit le nom de l'objet et envoie Enter, (5) clique sur l'élément retourné, (6) parse les \texttt{radecVal}, (7) envoie le résultat à l'Arduino, (8) ferme proprement le driver dans un bloc \texttt{finally}.
+    \item \texttt{set\_background\_image()} : charge une image PNG de la Voie Lactée via PIL (\texttt{Image.open}), la redimensionne en 1200$\times$800 avec un échantillonnage LANCZOS (haute qualité), et la dessine sur un \texttt{Canvas} Tkinter.
+    \item \texttt{animate\_background()} : déplace l'image de fond de 0,5 px à chaque appel et se réinvoque toutes les 50 ms via \texttt{master.after(50, ...)}.
+\end{itemize}
+\subsubsection{exemple}
+\begin{figure}[H]
+    \centering
+    \begin{tcolorbox}[
+        colback=black,
+        colframe=gray,
+        width=0.5\textwidth,
+        arc=4pt,
+        title={\texttt{/dev/ttyUSB0 — 115200 baud}},
+        fonttitle=\small\color{white},
+        coltitle=white,
+        colbacktitle=gray!50!black
+    ]
+    {\color{white}\begin{verbatim}
+347° 59' 24"
+73° 58' 12"
+    \end{verbatim}}
+    \end{tcolorbox}
+    \caption{Trame série envoyée à l'Arduino pour l'étoile Capella 
+    (Azimut : $347°59'24''$, Altitude : $73°58'12''$).}
+    \label{fig:trame_serie}
+\end{figure}
+\subsubsection{Décodage côté Arduino}
+Côté Arduino n°2, la chaîne reçue par UART est décodée par \texttt{inputString.indexOf('°')}, \texttt{indexOf('\textbackslash{}'')} et \texttt{indexOf('\textbackslash{}"')} pour extraire degré, minute et seconde de chaque angle. La conversion en degrés décimaux et le calcul du delta par rapport à la position actuelle alimentent la bibliothèque \texttt{AccelStepper} qui génère des rampes d'accélération douces vers la consigne.
+
+\subsection{Le Mode de Suivi (Following Mode) - Ajout Algorithmique}
+\subsubsection{Motivation et principe}
+Une fois la cible acquise par le mode hors-ligne ou en ligne, la rotation de la Terre déplace l'objet apparent dans le ciel à la \textbf{vitesse sidérale} :
+\begin{equation}
+    \omega_{\text{sidérale}} = \frac{d(HA)}{dt} = \frac{360^\circ}{86164{,}1\,\text{s}} \approx 15{,}04107^\circ/\text{heure} \approx 4{,}178 \times 10^{-3}\,{}^\circ/\text{s}
+\end{equation}
+Le \textbf{mode de suivi} (\textit{Following Mode}) compense cette dérive en réactualisant en continu les coordonnées horizontales de l'objet, indispensable pour deux usages :
+\begin{enumerate}
+    \item \textbf{Observation visuelle prolongée} : maintenir l'objet centré dans l'oculaire sans intervention manuelle ;
+    \item \textbf{Astrophotographie par stacking} : compenser le filé d'étoiles sur des poses unitaires de 10 s à 1 min, puis empiler $N$ poses pour amplifier le rapport signal sur bruit
+\end{enumerate}
+
+\subsubsection{Dérivation des vitesses angulaires}
+Sur une monture Dobsonienne, contrairement à une monture équatoriale qui ne nécessite qu'une rotation à vitesse constante autour d'un axe, l'Altitude et l'Azimut varient \textit{simultanément} et de manière \textbf{non linéaire}. En dérivant les équations \eqref{eq:alt} et \eqref{eq:az} par rapport au temps (règle de composition, avec $\phi$ et $Dec$ constants car la latitude et la déclinaison ne dépendent pas du temps), on obtient les vitesses angulaires requises sur chaque moteur :
+
+\textbf{Vitesse en altitude.} Dérivons $\sin(Alt) = \sin(\phi)\sin(Dec) + \cos(\phi)\cos(Dec)\cos(HA)$ :
+\begin{align}
+    \cos(Alt) \cdot \frac{d(Alt)}{dt} &= -\cos(\phi)\cos(Dec)\sin(HA) \cdot \frac{d(HA)}{dt}
+\end{align}
+En remarquant que $\cos(\phi)\cos(Dec)\sin(HA) = \cos(Alt)\sin(Az)$ (autre identité du triangle sphérique), il vient :
+\begin{equation}
+    \boxed{\;v_{Alt}(t) = \frac{d(Alt)}{dt} = -\cos(\phi)\sin(Az) \cdot \omega_{\text{sidérale}}\;}
+    \label{eq:vAlt}
+\end{equation}
+
+\textbf{Vitesse en azimut.} En dérivant l'identité $\cos(Az) = \dfrac{\sin(Dec) - \sin(Alt)\sin(\phi)}{\cos(Alt)\cos(\phi)}$, et après simplification :
+\begin{equation}
+    \boxed{\;v_{Az}(t) = \frac{d(Az)}{dt} = \left(\sin(\phi) + \cos(\phi)\cos(Az)\tan(Alt)\right) \cdot \omega_{\text{sidérale}}\;}
+    \label{eq:vAz}
+\end{equation}
+
+\subsubsection{Cas particuliers et singularité au zénith}
+\begin{itemize}
+    \item Lorsque l'astre traverse le méridien ($HA = 0$), $\sin(Az) = 0$ et donc $v_{Alt} = 0$ : le mouvement est purement azimutal.
+    \item Lorsque l'astre passe au zénith ($Alt \to 90^\circ$), $\tan(Alt) \to +\infty$ et $v_{Az}$ diverge : c'est la \textbf{singularité au zénith}, caractéristique des montures alt-azimutales. Cette zone d'environ $\pm 2^\circ$ autour du zénith est inaccessible au suivi.
+\end{itemize}
+\textbf{Note :} C'est dans le cas général. 
+Dans le cadre de notre réalisation, une contrainte mécanique supplémentaire 
+s'impose : l'altitude du télescope ne doit pas dépasser $Alt_{\max} = 50^\circ$. 
+Toute cible dont l'altitude calculée excède ce seuil doit être rejetée avant 
+l'envoi des commandes aux moteurs.
+
+\subsubsection{Discrétisation et conversion en pas moteur}
+Le firmware échantillonne les équations \eqref{eq:vAlt} et \eqref{eq:vAz} à intervalle $\Delta t = 1$ s grâce à un timer matériel (Timer1 de l'ATmega328). À chaque tick :
+\begin{equation}
+    \Delta\theta_{Alt} = v_{Alt}(t) \cdot \Delta t, \quad \Delta\theta_{Az} = v_{Az}(t) \cdot \Delta t
+\end{equation}
+On convertit ensuite en micro-pas via les rapports de réduction calculés précédemment :
+\begin{align}
+    N_{\mu\text{-pas, Alt}} &= \frac{\Delta\theta_{Alt}}{1{,}8^\circ} \times 32 \times i_{Alt} \\
+    N_{\mu\text{-pas, Az}}  &= \frac{\Delta\theta_{Az}}{1{,}8^\circ}  \times 32 \times i_{Az}
+\end{align}
+
+\subsubsection{La partie de code responsable du suivi}
+\begin{lstlisting}[language=C++, caption={La partie de code responsable du suivi}]
+volatile bool tick = false;
+ISR(TIMER1_COMPA_vect) { tick = true; }   // interruption 1 Hz
+
+#define ALT_MAX 50.0   // Limitation mécanique du systeme
+
+void followingLoop() {
+  if (tick) {
+    tick = false;
+    // 1. Recalcul du temps sideral
+    incrementClock();           // +1 s sur horloge interne
+    float gst = calculateGST(year, month, day, hour, minute, second);
+    float lst = calculateLST(gst, longitude);
+    // 2. Recalcul Alt/Az
+    float newAlt, newAz;
+    calculateAltAz(ra, dec, lat, lst, newAlt, newAz);
+    // 3. Vérification limitation mécanique (Alt <= 50°)
+    if (newAlt > ALT_MAX) {
+        lcd.clear();
+        lcd.print("Alt > 50deg !");
+        lcd.setCursor(0, 1);
+        lcd.print("Cible inaccessible");
+        motor1.stop();
+        motor2.stop();
+        return;   // sortir sans bouger les moteurs
+    }
+    // 4. Delta par rapport a la position precedente
+    float dAlt = newAlt - prealt;
+    float dAz  = newAz  - preaz;
+    // Correction du passage à 360°
+    if (dAz >  180) dAz -= 360;
+    if (dAz < -180) dAz += 360;
+    // 5. Conversion en micro-pas
+    long stepsAlt = (long)((dAlt / 1.8) * 32 * i_Alt);
+    long stepsAz  = (long)((dAz  / 1.8) * 32 * i_Az);
+    // 6. Commande differentielle (rampe douce)
+    motor1.move(stepsAlt);
+    motor2.move(stepsAz);
+    prealt = newAlt;
+    preaz  = newAz;
+  }
+  motor1.run();
+  motor2.run();
+}
+\end{lstlisting}
+
+\subsubsection{Organigramme du Following Mode}
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}[node distance=1.3cm, scale=0.78, transform shape]
+        \node (start) [startstop] {Cible acquise};
+        \node (timer) [process, below of=start] {Timer1 : 1 Hz};
+        \node (tick) [decision, below of=timer, yshift=-0.3cm] {Tick ?};
+        \node (clk) [process, below of=tick, yshift=-0.4cm] {+1 s sur RTC};
+        \node (recalc) [process, below of=clk] {Recalcul Alt, Az};
+        \node (altcheck) [decision, below of=recalc, yshift=-0.4cm] {$Alt > 50^\circ$ ?};
+        \node (warning) [process, right of=altcheck, xshift=3.8cm] {LCD : Cible inaccessible};
+        \node (stop) [startstop, below of=warning] {Stop moteurs};
+        \node (delta) [process, below of=altcheck, yshift=-1.4cm] {Calcul $\Delta$Alt, $\Delta$Az};
+        \node (steps) [process, below of=delta] {Conversion en $\mu$-pas};
+        \node (cmd) [startstop, below of=steps] {Commande moteurs};
+        \draw [arrow] (start) -- (timer);
+        \draw [arrow] (timer) -- (tick);
+        \draw [arrow] (tick.east) to[bend left=60] node[right]{non} (timer.east);
+        \draw [arrow] (tick) -- node[right]{oui} (clk);
+        \draw [arrow] (clk) -- (recalc);
+        \draw [arrow] (recalc) -- (altcheck);
+        \draw [arrow] (altcheck) -- node[right]{non} (delta);
+        \draw [arrow] (altcheck) -- node[above]{oui} (warning);
+        \draw [arrow] (warning) -- (stop);
+        \draw [arrow] (delta) -- (steps);
+        \draw [arrow] (steps) -- (cmd);
+        \draw [arrow] (cmd.west) to[bend left=60] (timer.west);
+    \end{tikzpicture}
+    \caption{Organigramme du mode de suivi (Following Mode)}
+    \label{fig:org_follow}
+\end{figure}
+
+\subsubsection{Simulation de la trajectoire de Capella}
+Pour valider l’algorithme, nous avons simulé numériquement la trajectoire apparente de Capella observée depuis Agadir sur une période allant de 18h00 à 09h00 UT. Les coordonnées calculées sont reportées sur le diagramme polaire ci-dessous. Afin de vérifier l’exactitude des résultats obtenus, les positions calculées ont été comparées à celles fournies par le logiciel Stellarium. Cette comparaison a confirmé la cohérence des calculs et la validité de l’algorithme de conversion et de suivi développé
+
+\begin{figure}[H]
+    \centering
+    
+    % --- FIRST FIGURE (TikZ) ---
+    \begin{minipage}[b]{0.48\textwidth}
+        \centering
+        % Using resizebox ensures the 10cm TikZ layout scales down perfectly to fit the minipage
+        \resizebox{\textwidth}{!}{%
+        \begin{tikzpicture}
+            \begin{polaraxis}[
+                xtick={0,30,60,90,120,150,180,210,240,270,300,330},
+                xticklabels={N,$30^\circ$,$60^\circ$,E,$120^\circ$,$150^\circ$,S,$210^\circ$,$240^\circ$,W,$300^\circ$,$330^\circ$},
+                ytick={0,30,60,90},
+                yticklabels={Zénith,$60^\circ$,$30^\circ$,$0^\circ$},
+                ymin=0, ymax=90,
+                grid=both,
+                width=10cm
+            ]
+            \addplot[blue, thick, smooth] coordinates {
+                (34.7,88.8) (37.1,86.3) (39.3,83.6) (41.4,80.8) (43.3,77.9)
+                (45.1,74.9) (46.7,71.8) (48.2,68.7) (49.6,65.4) (50.7,62.1)
+                (51.7,58.7) (52.5,55.3) (53.2,51.9) (53.5,48.4) (53.6,45.0)
+                (53.5,41.5) (52.9,38.0) (51.8,34.6) (50.2,31.3) (47.7,28.0)
+                (44.2,24.9) (39.3,22.0) (32.6,19.5) (23.7,17.4) (12.6,16.1)
+                (0.0,15.6) (347.4,16.1) (336.3,17.4) (327.4,19.5) (320.7,22.0)
+                (315.8,24.9) (312.3,28.0) (309.8,31.3) (308.2,34.6) (307.1,38.0)
+                (306.5,41.5) (306.4,45.0) (306.5,48.4) (306.8,51.9) (307.5,55.3)
+                (308.3,58.7) (309.3,62.1) (310.4,65.4) (311.8,68.7) (313.3,71.8)
+                (314.9,74.9) (316.7,77.9) (318.6,80.8) (320.7,83.6) (322.9,86.3)
+                (325.3,88.8)
+            };
+            \node[blue, font=\small, right] at (axis cs:34.7,88.8) {Lever};
+            \node[blue, font=\small, left]  at (axis cs:325.3,88.8) {Coucher};
+            \node[blue, font=\small, right] at (axis cs:12.6,16.1) {Transit};
+            \end{polaraxis}
+        \end{tikzpicture}%
+        }
+        \caption{Trajectoire complète de Capella depuis Agadir (latitude $30{,}4^\circ$N).}
+        \label{fig:traj_capella_complete}
+    \end{minipage}% <--- This percent sign is critical to keep them on the same line!
+    \hfill % Adds horizontal space between the two images
+    % --- SECOND FIGURE (Image) ---
+    \begin{minipage}[b]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{IMG_7838.JPG.jpeg}
+        \caption{La validité de l’algorithme sur Stellarium.}
+        \label{fig:stellarium_validity}
+    \end{minipage}
+    
+\end{figure}
+\subsubsection{Phénomène de rotation de champ}
+À noter que sur une monture alt-azimutale, l'image rotée dans le plan focal au cours du suivi (phénomène dit de \textbf{field rotation}). Pour l'astrophotographie longue pose, un \textit{dérotateur de champ} mécanique serait nécessaire — cette fonctionnalité dépasse le cadre du présent prototype mais constitue une perspective d'amélioration.
+
+\subsection{Le Mode Manuel (Joystick)}
+\subsubsection{Définition et utilité}
+Le \textbf{mode manuel} permet à l'utilisateur de piloter directement les deux moteurs via le joystick analogique de la télécommande, en désactivant tout calcul trigonométrique. Ce mode est essentiel pour trois usages :
+\begin{enumerate}
+    \item \textbf{Pointage initial (aiming the LOS)} : aligner manuellement la ligne de visée (Line of Sight) sur une étoile de référence avant d'entamer un suivi automatique ;
+    \item \textbf{Centrage de l'objet} : corriger l'éventuelle erreur résiduelle (jusqu'à $1^\circ$) du mode automatique due au backlash mécanique ;
+    \item \textbf{Calibrage et homing} : vérifier la procédure de fin de course et établir une nouvelle origine.
+\end{enumerate}
+
+\subsubsection{Principe de fonctionnement}
+En mode manuel, l’Arduino n°1 désactive les calculs sphériques et transmet direc-
+tement, via la broche logique D9 (mise à HIGH), un signal d’activation à l’Arduino
+n°2. Ce dernier scrute alors continuellement les valeurs analogiques des axes X et
+Y du joystick (résolution 10 bits, soit 0 à 1023), centrées autour de la valeur de
+repos = 512, Un seuil (threshold ) de 50 unités est appliqué autour de ce centre pour
+définir une zone morte (deadzone) qui prévient les dérives parasites dues au bruit
+analogique et aux légères variations mécaniques du joystick
+
+\begin{equation}
+    v_{\text{moteur}} = \begin{cases}
+        -v_{\max} & \text{si } X < 512 - \tau \\
+        0 & \text{si } |X - 512| \leq \tau \\
+        +v_{\max} & \text{si } X > 512 + \tau
+    \end{cases}
+    \quad \text{avec } \tau = 50,\ v_{\max} = 500\,\text{pas/s}
+\end{equation}
+
+\subsubsection{Extrait de code commenté}
+\begin{lstlisting}[language=C++, caption={Logique de pilotage joystick (Arduino n°2).}]
+// Lecture analogique 10 bits (0 à 1023, repos = 512)
+int joystickXValue = analogRead(joystickXPin);
+int joystickYValue = analogRead(joystickYPin);
+
+// Moteur 1 (Azimut) piloté par l'axe X
+if (joystickXValue < (512 - threshold)) {
+  motor1.setSpeed(-maxSpeed);   // rotation horaire
+} else if (joystickXValue > (512 + threshold)) {
+  motor1.setSpeed(maxSpeed);    // rotation antihoraire
+} else {
+  motor1.setSpeed(0);           // zone morte : arrêt
+}
+
+// Moteur 2 (Altitude) piloté par l'axe Y
+if (joystickYValue < (512 - threshold)) {
+  motor2.setSpeed(-maxSpeed);
+} else if (joystickYValue > (512 + threshold)) {
+  motor2.setSpeed(maxSpeed);
+} else {
+  motor2.setSpeed(0);
+}
+
+// Exécution simultanée des deux moteurs en mode "continuous speed"
+motor1.runSpeed();
+motor2.runSpeed();
+\end{lstlisting}
+
+\subsubsection{Caractérisation expérimentale}
+Le tableau~\ref{tab:joystick} caractérise les performances du mode manuel :
+\begin{table}[H]
+    \centering
+    \caption{Performances du mode manuel.}
+    \label{tab:joystick}
+    \begin{tabular}{|l|c|}
+        \hline
+        \textbf{Paramètre} & \textbf{Valeur} \\
+        \hline
+        Résolution joystick & 10 bits (1024 niveaux) \\
+        Centre nominal & 512 $\pm$ 5 \\
+        Seuil (deadzone) & $\pm 50$ ($\approx \pm 5\%$) \\
+        Vitesse max & 500 pas/s \\
+        Vitesse angulaire Az max & $\approx 0{,}79^\circ$/s \\
+        Vitesse angulaire Alt max & $\approx 3{,}22^\circ$/s \\
+        Temps de réaction & $\sim 50$ ms \\
+        \hline
+    \end{tabular}
+\end{table}
+
+\section{Système d'alimentation et dimensionnement}
+
+\subsection{Bilan de puissance détaillé}
+Le dimensionnement de l'alimentation est une étape critique pour garantir le bon
+fonctionnement du système. Le bilan de puissance est dominé par les deux moteurs
+NEMA 17. Un moteur consomme théoriquement $1{,}7$ A par phase, mais sous un
+pilotage en microstepping et en l'absence de charge nominale continue, le courant
+moyen consommé avoisine $0{,}4$ à $0{,}6$ A. L'Arduino Nano consomme
+$\approx 50$ mA et le LCD I2C $\approx 20$ mA.
+
+\begin{table}[H]
+    \centering
+    \caption{Bilan détaillé des consommations électriques.}
+    \begin{tabular}{|l|c|c|c|c|}
+        \hline
+        \textbf{Élément} & \textbf{Tension} & \textbf{I moyen} & \textbf{I crête} & \textbf{P moyen} \\
+        \hline
+        Moteur NEMA 17 Az    & 12 V & 0,4 A  & 1,7 A  & 4,8 W  \\
+        Moteur NEMA 17 Alt   & 12 V & 0,4 A  & 1,7 A  & 4,8 W  \\
+        Driver A4988 ($\times 2$) & 5 V & 20 mA & 30 mA & 0,2 W \\
+        Arduino Nano \#1     & 5 V  & 50 mA  & 80 mA  & 0,25 W \\
+        Arduino Nano \#2     & 5 V  & 50 mA  & 80 mA  & 0,25 W \\
+        LCD I2C              & 5 V  & 20 mA  & 40 mA  & 0,1 W  \\
+       % Laser vert 5 mW      & 5 V  & 30 mA  & 50 mA  & 0,15 W \\
+        \hline
+        \textbf{Total moyen} & & & & \textbf{$\approx 10{,}4$ W} \\
+%        \textbf{Total crête} & & & & \textbf{$\approx 42{,}2$ W}     \\
+        \hline
+    \end{tabular}
+\end{table}
+
+\subsection{Solution principale : alimentation secteur 230 V / 12 V}
+
+Pour une utilisation en observatoire fixe ou dans tout lieu disposant d'une prise
+secteur, le montage est alimenté par un \textbf{adaptateur secteur 230 V$\;\to\;$12 V}
+à découpage. Le choix du modèle repose sur le courant crête total du système.
+
+Le courant total crête sur le rail 12 V est dominé par les deux moteurs :
+\begin{equation}
+    I_{\text{crête, 12V}} = 2 \times 1{,}7\;\text{A} = 3{,}4\;\text{A}
+\end{equation}
+
+En ajoutant la consommation de la logique ramenée sur le rail 12 V via le
+régulateur 5 V (rendement $\eta \approx 0{,}85$) :
+\begin{equation}
+    I_{\text{logique, 12V}} = \frac{P_{\text{logique}}}{V \cdot \eta}
+    = \frac{(0{,}2 + 0{,}25 + 0{,}25 + 0{,}1 + 0{,}15)\;\text{W}}{12\;\text{V}
+    \times 0{,}85} \approx 0{,}09\;\text{A}
+\end{equation}
+
+Le courant total crête sur le rail 12 V est donc :
+\begin{equation}
+    I_{\text{total, crête}} = 3{,}4 + 0{,}09 \approx 3{,}5\;\text{A}
+\end{equation}
+
+En appliquant un coefficient de sécurité de $1{,}5$ :
+\begin{equation}
+    I_{\text{alim}} \geq 1{,}5 \times 3{,}5 = 5{,}25\;\text{A}
+\end{equation}
+
+Un adaptateur secteur \textbf{12 V -- 5 A} (60 W) est donc largement suffisant
+pour couvrir le fonctionnement nominal et les appels de courant transitoires, avec
+une puissance délivrée :
+\begin{equation}
+    P_{\text{alim}} = 12\;\text{V} \times 5\;\text{A} = 60\;\text{W}
+    \;\gg\; P_{\text{crête}} \approx 24\;\text{W}
+\end{equation}
+
+Cette solution est simple, économique et ne présente aucune contrainte d'autonomie
+tant qu'une prise 230 V est disponible.
+
+\subsection{Amélioration : alimentation sur batterie Li-ion pour usage nomade}
+
+Lorsque le télescope est utilisé en extérieur, loin de toute prise secteur (site
+d'observation en montagne, désert, etc.), l'adaptateur secteur ne peut plus être
+employé. Une \textbf{batterie Li-ion} prend alors le relais, en délivrant
+directement la tension 12 V nécessaire.
+
+\subsubsection*{Énergie requise pour une soirée d'observation}
+
+Pour une session d'observation de $T = 4$ heures, l'énergie consommée est :
+\begin{equation}
+    E = P_{\text{moy}} \cdot T = 10{,}8\;\text{W} \times 4\;\text{h}
+    = 43{,}2\;\text{Wh}
+\end{equation}
+
+En appliquant un coefficient de sécurité de $1{,}5$ (marge pour les pics de
+courant et le vieillissement de la batterie) :
+\begin{equation}
+    E_{\text{batterie}} \;\geq\; 1{,}5 \times 43{,}2 \approx 65\;\text{Wh}
+\end{equation}
+
+\subsubsection*{Choix de la batterie}
+
+\begin{table}[H]
+    \centering
+    \caption{Comparaison des solutions de batterie pour usage nomade.}
+    \begin{tabular}{|l|c|c|c|c|c|}
+        \hline
+        \textbf{Type} & \textbf{Tension} & \textbf{Capacité} & \textbf{Énergie}
+        & \textbf{Masse} & \textbf{Critère} \\
+        \hline
+        Li-ion 3S & 11,1 V & 5000 mAh & 55,5 Wh & 350 g  & $<65$ Wh ✗ \\
+        Li-ion 4S & 14,8 V & 5000 mAh & 74 Wh   & 450 g  & $>65$ Wh ✓ \\
+        Pb scellé & 12 V   & 7 Ah     & 84 Wh   & 2200 g & Trop lourd ✗ \\
+        \hline
+    \end{tabular}
+\end{table}
+
+La \textbf{batterie Li-ion 4S 5000 mAh} (74 Wh) est retenue : elle est la seule
+à satisfaire simultanément le critère énergétique ($74\;\text{Wh} > 65\;\text{Wh}$)
+et la contrainte de masse pour un usage portable. L'autonomie effective estimée est :
+\begin{equation}
+    T_{\text{autonomie}} = \frac{E_{\text{batterie}}}{P_{\text{moy}}}
+    = \frac{74\;\text{Wh}}{10{,}8\;\text{W}} \approx 6{,}9\;\text{h}
+\end{equation}
+
+Ce qui représente une marge confortable de $+73\%$ au-delà des 4 heures requises.
+Une carte BMS (Battery Management System) intégrée protège contre les
+sur-décharges, surcharges et courts-circuits.
+\subsection{Architecture de l'alimentation}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.9\linewidth]{sssss.drawio.png}
+	\caption{Architecture  simplifié du circuit d’alimentation : 12 V → drivers (direct) et → 5
+V pour la logique (arduino).}
+\end{figure}
+
+\section{La Touche Finale et Résultats}
+\subsection{Le support laser vert (« Finder »)}
+
+Un support imprimé en 3D, précisément aligné avec l’axe optique du télescope, est prévu pour accueillir un laser de guidage. Ce dispositif est crucial
+pour :
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.9\linewidth]{Screenshot 2026-06-11 054241.png}
+	\caption{Laser de guidage}
+\end{figure}
+\begin{enumerate}
+    \item Effectuer un \textbf{alignement grossier} sur une étoile brillante de référence avant de basculer en mode hors-ligne ou en ligne ;
+    \item Vérifier visuellement la \textbf{précision de pointage} : si après une commande GoTo le laser tombe à $0{,}5^\circ$ de l'étoile cible, l'erreur résiduelle est immédiatement quantifiable ;
+    \item Servir d'outil pédagogique lors de soirées d'observation publiques pour montrer aux spectateurs où se situe l'objet pointé.
+\end{enumerate}
+\subsection{LOGO}
+Un logo a été conçu afin de renforcer l’identité visuelle et le professionnalisme du projet.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.9\linewidth]{logos.png}
+	\caption{LOGO }
+\end{figure}
+\subsection{Tests sur le terrain et observations réalisées}
+Les tests sur le terrain ont été conduits depuis le site d'Agadir ($\phi = 30{,}4^\circ$N, $\lambda = -9{,}6^\circ$, altitude 60 m) au cours de plusieurs soirées d'observation entre l'automne et l'hiver 2024-2025. Les cibles principales observées avec succès sont :
+\begin{itemize}
+%Oceanus Procellarum (l’Océan des Tempêtes)
+    \item \textbf{La Lune} : observation détaillée des cratères dans la région de l'Oceanus Procellarum (l’Océan des Tempêtes), avec une bonne résolution  
+    \item \textbf{La comète C/2023 A3 (Tsuchinshan-ATLAS)} : acquisition manuelle réussie en octobre 2024 lors de son passage proche de la Terre ;
+    \item \textbf{Étoiles brillantes du catalogue} : Sirius, Vega, Altaïr, Aldebaran ;
+    \item\textbf{Amas d’étoiles }: les Pléiades (M45), observables comme un groupe d’étoiles brillantes facilement identifiable ;
+    \item \textbf{Planètes} : Jupiter et Saturne, identifiables parmi les objets les plus lumineux du ciel nocturne. Jupiter apparaît comme un petit disque lumineux avec éventuellement ses quatre principaux satellites galiléens dans de bonnes conditions, tandis que Saturne présente une forme légèrement allongée.
+\end{itemize}
+
+\subsection{Précision de pointage mesurée}
+La précision de pointage a été quantifiée en comparant la position visée (selon les coordonnées Stellarium) à la position effectivement atteinte par le télescope (validée à l'oculaire et au laser). Le graphique suivant présente l'erreur angulaire mesurée sur 10 cibles :
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}
+        \begin{axis}[
+            ybar,
+            width=14cm, height=7cm,
+            ylabel={Erreur de pointage (°)},
+            symbolic x coords={Sirius, Vega, Altaïr, Aldebaran, Capella, Lune, Jupiter, Saturne, Régulus, Procyon},
+            xtick=data,
+            x tick label style={rotate=45, anchor=east},
+            ymin=0, ymax=1.8,
+            bar width=8pt,
+            nodes near coords,
+            nodes near coords style={font=\tiny},
+            legend style={at={(0.99,0.97)}, anchor=north east},
+            legend cell align={left},
+        ]
+
+        %% Online mode: small error, varies due to backlash & misalignment
+        \addplot[fill=blue!50] coordinates {
+            (Sirius,    0.5)
+            (Vega,      0.52)
+            (Altaïr,    0.67)
+            (Aldebaran, 0.45)
+            (Capella,   0.50)
+            (Lune,      0.05)
+            (Jupiter,   0.68)
+            (Saturne,   0.64)
+            (Régulus,   0.61)
+            (Procyon,   0.59)
+        };
+        \addlegendentry{Mode en ligne}
+
+        %% Offline mode: larger but acceptable error, driven by calculation only (12× zoom)
+        \addplot[fill=red!50] coordinates {
+            (Sirius,    0.80)
+            (Vega,      1.10)
+            (Altaïr,    0.75)
+            (Aldebaran, 1.20)
+            (Capella,   0.95)
+            (Lune,      1098)
+            (Jupiter,   1160.40)
+            (Saturne,   189.30)
+            (Régulus,   1.05)
+            (Procyon,   0.85)
+        };
+        \addlegendentry{Mode hors ligne}
+
+        \end{axis}
+    \end{tikzpicture}
+    \caption{Erreur de pointage en mode en ligne (bleu) et hors-ligne (rouge) pour 10 cibles célestes depuis Agadir.}
+    \label{fig:precision_telescope}
+\end{figure}
+\begin{remarque}
+     ces erreurs ont été obtenues par une combinaison de simulations et de tests réels effectués en journée, et non de nuit
+\end{remarque}
+
+Pour une comparaison équitable entre les deux modes, les objets du système solaire  la Lune, Jupiter et Saturne  ont été exclus de l'analyse, car leurs positions évoluent trop rapidement pour être calculées avec précision en mode horsligne à partir des coordonnées , ce qui engendre des erreurs anormalement élevées non représentatives du comportement général du système. En ne retenant que les cibles stellaires fixes, l'erreur moyenne de pointage en mode en ligne s'établit à \textbf{0,55°}, tandis qu'elle atteint \textbf{0,96°} en mode hors-ligne. avec un rapport d'environ 1,74, reste néanmoins acceptable compte tenu du grossissement modeste de 12× du télescope artisanal, pour lequel une telle précision de pointage demeure tout à fait suffisante.\\
+
+generalement ces erreurs sont liées principalement à :\\
+
+\begin{itemize}
+    \item Le \textbf{backlash mécanique} (jeu d'engrenage) des pignons imprimés en 3D, particulièrement marqué lors d'un changement de sens de rotation ;
+    \item L'\textbf{erreur d'orthogonalité} entre les deux axes (mesure imparfaite à la construction) ;
+   
+\end{itemize}
+
+\subsection{Photos du prototype et des observations}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.9\linewidth]{Screenshot 2026-06-11 142301.png}
+	\caption{Télescope assemblé au FabLab et en cours de test nocturne à Agadir.}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\makebox[\linewidth]{\includegraphics[width=1.1\linewidth]{Screenshot 2026-06-11 135251.png}}
+	\caption{À gauche : photographie de la Lune réalisée à travers l’oculaire avec un smartphone. Au centre : cliché de la planète Saturne. À droite : comète C/2023 A3 capturée pendant son passage en octobre 2024.}
+\end{figure}
+\begin{remarque}
+    Ces photos ont été prises avec la caméra d’un téléphone, mais à l’observation à l’œil nu, la vue apparaissait beaucoup plus détaillée.
+
+\end{remarque}
+\subsection{Perspectives d'amélioration}
+Plusieurs axes d'amélioration ont été identifiés pour de futures itérations :
+\begin{enumerate}
+    \item \textbf{Téléscope secondaire 80$\times$} : intégration d'un instrument secondaire à plus fort grossissement, monté en parallèle, pour observation détaillée après pointage par l'instrument principal ;
+    \item \textbf{Motorisation du focuser} (mise au point) : remplacer la mise au point manuelle par un troisième moteur stepper piloté à distance ;
+    \item \textbf{Encodeurs absolus} sur les deux axes pour fermer la boucle d'asservissement et éliminer la sensibilité au backlash ;
+    \item \textbf{Module GPS} pour acquérir automatiquement la latitude, longitude et l'heure UT, supprimant la phase de saisie manuelle ;
+    \item \textbf{Caméra CCD/CMOS} avec interface USB pour pratiquer l'astrophotographie planétaire et l'autoguidage par étoile-guide ;
+    \item \textbf{Application mobile} (Bluetooth ou Wi-Fi) pour piloter le télescope depuis un smartphone, avec connexion à Stellarium Mobile.
+\end{enumerate>
+
+\clearpage
+
+% ---------------------------------
+% CONCLUSION
+% ---------------------------------
+\chapter*{Conclusion Générale}
+\addcontentsline{toc}{chapter}{Conclusion Générale}
+Le projet "Étude et réalisation d'un Télescope Dobsonien Autoguidé" a constitué une excellente opportunité de mettre en pratique et d'approfondir les compétences acquises durant ma formation à la FST de Tanger. Il a exigé de la rigueur à travers un large spectre de disciplines de l'ingénieur : conception mécanique et modélisation sur Onshape, théorie optique, électronique de puissance avec isolation des signaux, et calcul algorithmique complexe basé sur la trigonométrie sphérique.
+
+Les objectifs initiaux ont été atteints : le télescope est fonctionnel, son boîtier de télécommande permet de naviguer dans le catalogue astronomique, et la communication Python-Stellarium offre une connectivité étendue. Le support précieux du FabLab d'Orange Digital Center et les composants/conseils de Moussasoft ont indéniablement catalysé le processus de réalisation.
+
+Parmi les limites actuelles du prototype figurent les tolérances mécaniques des pignons imprimés en 3D qui introduisent un léger "backlash" (jeu d'engrenage), réduisant la précision absolue du pointage automatique. En termes de perspectives, il serait judicieux de remplacer la courroie crantée par un engrenage usiné en aluminium ou d'implémenter un algorithme de correction de backlash dans le code Arduino. De plus, l'intégration d'un encodeur rotatif permettrait une boucle fermée (closed-loop) pour l'asservissement, rendant le système GoTo totalement autonome face aux erreurs de positionnement physique.
+
+En conclusion, ce projet fut une formidable aventure scientifique et humaine, me préparant efficacement aux exigences complexes des systèmes mécatroniques et de l'ingénierie moderne.
+
+\clearpage
+
+% ---------------------------------
+% BIBLIOGRAPHIE
+% ---------------------------------
+\begin{thebibliography}{99}
+\addcontentsline{toc}{chapter}{Bibliographie}
+
+\bibitem{smart}
+W.M. Smart, \textit{Text-Book on Spherical Astronomy}, Cambridge University Press, 6th Edition, 1977.
+
+\bibitem{meeus}
+Jean Meeus, \textit{Astronomical Algorithms}, Willmann-Bell, 2nd Edition, 1998.
+
+\bibitem{arduino}
+Documentation officielle Arduino, \textit{Arduino Nano \& Libraries}, \url{https://www.arduino.cc/en/Reference/HomePage}.
+
+\bibitem{accelstepper}
+Mike McCauley, \textit{AccelStepper Library for Arduino}, \url{https://www.airspayce.com/mikem/arduino/AccelStepper/}.
+
+\bibitem{stellarium}
+Stellarium Web Online Planetarium, \textit{Web Service API}, \url{https://stellarium-web.org/}.
+
+\bibitem{onshape}
+Onshape CAD, PTC, \textit{Cloud-based 3D CAD}, \url{https://www.onshape.com}.
+
+\bibitem{moussasoft}
+Moussasoft E-commerce, \textit{Composants électroniques, Arduino et Robotique}, \url{https://www.moussasoft.com/}.
+
+\bibitem{odc}
+Orange Digital Center Maroc, \textit{FabLab et Écosystème digital}, \url{https://www.orangedigitalcenters.com/country/ma/home}.
+
+\bibitem{instructable}
+AK-HAIL Oussama, \textit{Autoguided Telescope Instructables}, ODC Agadir, 2024.
+
+\bibitem{selenium}
+Selenium Webdriver for Python, \textit{Browser Automation}, \url{https://selenium-python.readthedocs.io/}.
+
+\bibitem{jpl}
+NASA JPL Horizons, \textit{Ephemeris System}, \url{https://ssd.jpl.nasa.gov/horizons/}.
+
+\bibitem{dawes}
+Rutten, H. et van Venrooij, M., \textit{Telescope Optics: Evaluation and Design}, Willmann-Bell, 1988.
+
+\bibitem{karttunen}
+H. Karttunen, P. Kröger, H. Oja, M. Poutanen, K.J. Donner, \textit{Fundamental Astronomy}, Springer-Verlag, 6th Edition, 2017.
+
+\bibitem{duffett}
+P. Duffett-Smith, \textit{Practical Astronomy with your Calculator}, Cambridge University Press, 3rd Edition, 1988.
+
+\bibitem{micro-step}
+Allegro MicroSystems, \textit{A4988 Stepper Motor Driver Datasheet}, 2014.
+
+\end{thebibliography}
+
+\clearpage
+
+% ---------------------------------
+% ANNEXES
+% ---------------------------------
+\appendix
+\chapter{Code complet : Arduino n°1 (Télécommande)}
+\addcontentsline{toc}{chapter}{Annexe A : Code Arduino n°1}
+Ce premier microcontrôleur gère le LCD, le joystick, les boutons, les calculs astronomiques (mode hors-ligne) et la communication avec l'Arduino n°2.
+
+\begin{lstlisting}[language=C++, caption={Firmware complet de l'Arduino n°1 (Télécommande, calculs et IHM).}, label={lst:arduino1}]
+/* Arduino n°1 : remote, calculs et IHM */
+#include 
+#include 
+#include 
+
+LCD_I2C lcd(0x27, 16, 2);
+
+const int stepPin1 = 2, dirPin1 = 3;
+const int stepPin2 = 5, dirPin2 = 4;
+AccelStepper motor1(AccelStepper::DRIVER, stepPin1, dirPin1);
+AccelStepper motor2(AccelStepper::DRIVER, stepPin2, dirPin2);
+
+int joystickXPin = A1, joystickYPin = A0;
+int joystickButtonPin = 12;
+int leftButtonPin = 11, rightButtonPin = 10;
+int pindyaljoy = 9, pindyalonline = 8;
+
+int modeState = 0, settingState = 0, scopeState = 0;
+int year = 2020, month = 1, day = 1, hour = 0, minute = 0, second = 0;
+float prealt = 0, preaz = 0;
+
+struct SkyObject { String name; float RA; float Dec; };
+SkyObject skyObjects[20] = {
+  {"Sirius", 6.7525, -16.7161}, {"Canopus", 6.3992, -52.6957},
+  {"Arcturus", 14.2610, 19.1825}, {"Vega", 18.6156, 38.7837},
+  {"Capella", 5.2782, 45.9979}, {"Rigel", 5.2423, -8.2016},
+  {"Procyon", 7.6550, 5.2250}, {"Achernar", 1.6286, -57.2368},
+  {"Betelgeuse", 5.9195, 7.4071}, {"Hadar", 14.0637, -60.3729},
+  {"Altair", 19.8463, 8.8683}, {"Aldebaran", 4.5987, 16.5092},
+  {"Antares", 16.4901, -26.4320}, {"Spica", 13.4199, -11.1613},
+  {"Pollux", 7.7553, 28.0262}, {"Fomalhaut", 22.9608, -29.6222},
+  {"Deneb", 20.6905, 45.2803}, {"Regulus", 10.1395, 11.9672},
+  {"Castor", 7.5766, 31.8884}, {"Alnair", 22.1372, -46.9601}
+};
+int selectedObject = 0;
+
+void setup() {
+  digitalWrite(pindyaljoy, LOW);
+  lcd.begin(); lcd.display(); lcd.backlight();
+  pinMode(joystickButtonPin, INPUT_PULLUP);
+  pinMode(leftButtonPin, INPUT);
+  pinMode(rightButtonPin, INPUT_PULLUP);
+  pinMode(pindyaljoy, OUTPUT);
+  pinMode(pindyalonline, OUTPUT);
+  lcd.setCursor(4,0); lcd.print("AK space"); delay(600);
+  lcd.setCursor(4,1); lcd.print("AK-scope"); delay(1000); lcd.clear();
+  settingState = 0; scopeState = 1;
+  Serial.begin(9600);
+}
+
+void loop() {
+  if (digitalRead(leftButtonPin) == HIGH) {
+    delay(200); modeState = (modeState == 0) ? 1 : 0; lcd.clear();
+  }
+  if (modeState == 0) { scope_mode(); }
+  else if (modeState == 1) {
+    lcd.setCursor(4,0); lcd.print("settings");
+    delay(600); handleSettingMode();
+  }
+}
+
+void handleSettingMode() {
+  switch (settingState) {
+    case 0: while (!joystickButtonPressed()) {
+        lcd.setCursor(0,0); lcd.print("Set Year: "); lcd.print(year);
+        if (joystickUp() && year < 2030) year++;
+        if (joystickDown() && year > 2020) year--;
+        if (digitalRead(leftButtonPin) == HIGH) { modeState = 1; break; }
+      } settingState++; lcd.clear(); delay(200); break;
+    case 1: while (!joystickButtonPressed()) {
+        lcd.setCursor(0,0); lcd.print("Set Month: "); lcd.print(month);
+        if (joystickUp() && month < 12) month++;
+        if (joystickDown() && month > 1) month--;
+        if (digitalRead(leftButtonPin) == HIGH) { modeState = 1; break; }
+      } settingState++; lcd.clear(); delay(200); break;
+    case 2: while (!joystickButtonPressed()) {
+        lcd.setCursor(0,0); lcd.print("Set Day: "); lcd.print(day);
+        if (joystickUp() && day < 31) day++;
+        if (joystickDown() && day > 1) day--;
+        if (digitalRead(leftButtonPin) == HIGH) { modeState = 1; break; }
+      } settingState++; lcd.clear(); delay(200); break;
+    case 3: while (!joystickButtonPressed()) {
+        lcd.setCursor(0,0); lcd.print("Set Hour: "); lcd.print(hour);
+        if (joystickUp() && hour < 23) hour++;
+        if (joystickDown() && hour > 0) hour--;
+        if (digitalRead(leftButtonPin) == HIGH) { modeState = 1; break; }
+      } settingState++; lcd.clear(); delay(200); break;
+    case 4: while (!joystickButtonPressed()) {
+        lcd.setCursor(0,0); lcd.print("Set Minute: "); lcd.print(minute);
+        if (joystickUp() && minute < 59) minute++;
+        if (joystickDown() && minute > 0) minute--;
+        if (digitalRead(leftButtonPin) == HIGH) { modeState = 1; break; }
+      } settingState++; lcd.clear(); delay(200); break;
+    case 5: while (!joystickButtonPressed()) {
+        lcd.setCursor(0,0); lcd.print("Set Second: "); lcd.print(second);
+        if (joystickUp() && second < 59) second++;
+        if (joystickDown() && second > 0) second--;
+        if (digitalRead(leftButtonPin) == HIGH) { modeState = 1; break; }
+      } settingState = 0; modeState = 0; lcd.clear(); break;
+  }
+}
+
+bool joystickUp()   { return (analogRead(joystickYPin) > 400) ? (delay(200), true) : false; }
+bool joystickDown() { return (analogRead(joystickYPin) < 600) ? (delay(200), true) : false; }
+bool joystickButtonPressed() {
+  return (digitalRead(joystickButtonPin) == LOW) ? (delay(200), true) : false;
+}
+
+void handleOfflineMode() {
+  lcd.setCursor(3,0); lcd.print(skyObjects[selectedObject].name);
+  if (joystickUp() && selectedObject < 19) { selectedObject++; lcd.clear(); }
+  if (joystickDown() && selectedObject > 0) { selectedObject--; lcd.clear(); }
+  if (joystickButtonPressed()) calculation();
+}
+
+float degreesToRadians(float d) { return d * PI / 180.0; }
+float radiansToDegrees(float r) { return r * 180.0 / PI; }
+
+float calculateGST(int year, int month, int day, int hour, int minute, int second) {
+  float UT = hour - 7 + minute - 15 / 60.0 + second / 3600.0;
+  int yTemp = year + (month + 9) / 12;
+  float d = 367 * year - (7 * yTemp) / 4 + (275 * month) / 9 + day - 730530;
+  float GST = 6.697374558 + 0.06570982441908 * d + 1.00273790935 * UT;
+  return fmod(GST, 24.0);
+}
+
+float calculateLST(float gst, float longitude) {
+  float LST = gst + longitude / 15.0;
+  return fmod(LST, 24.0);
+}
+
+void calculateAltAz(float ra, float dec, float lat, float lst, float &alt, float &az) {
+  float HA = fmod((lst * 15.0 - ra * 15.0), 360.0);
+  if (HA < 0) HA += 360.0;
+  HA = degreesToRadians(HA);
+  dec = degreesToRadians(dec);
+  lat = degreesToRadians(lat);
+  float sinAlt = sin(dec)*sin(lat) + cos(dec)*cos(lat)*cos(HA);
+  alt = asin(sinAlt);
+  float cosAz = (sin(dec) - sin(alt)*sin(lat)) / (cos(alt)*cos(lat));
+  cosAz = constrain(cosAz, -1, 1);
+  az = acos(cosAz);
+  alt = radiansToDegrees(alt); az = radiansToDegrees(az);
+  if (sin(HA) > 0) az = 360.0 - az;
+}
+
+float calculation() {
+  float latitude = 30.25, longitude = -9.36;
+  float RA = skyObjects[selectedObject].RA;
+  float Dec = skyObjects[selectedObject].Dec;
+  lcd.clear(); lcd.setCursor(0,0); lcd.print("Calculating...");
+  float gst = calculateGST(year, month, day, hour, minute, second);
+  float lst = calculateLST(gst, longitude);
+  float alt, az; calculateAltAz(RA, Dec, latitude, lst, alt, az);
+  char buffer[10] = "";
+  sprintf(buffer, "%d°%d°", (int)az, (int)alt);
+  Serial.println(buffer);
+  lcd.clear(); lcd.print("az: "); lcd.print(az);
+  lcd.setCursor(0,1); lcd.print("alt: "); lcd.print(alt);
+  delay(2000); lcd.clear();
+  return az, alt;
+}
+
+void scope_mode() {
+  switch (scopeState) {
+    case 1: // Offline
+      while (digitalRead(rightButtonPin) == 1) {
+        digitalWrite(pindyaljoy, LOW); digitalWrite(pindyalonline, LOW);
+        handleOfflineMode();
+        if (digitalRead(leftButtonPin) == HIGH) { modeState = 0; break; }
+        if (digitalRead(rightButtonPin) == 0)   { scopeState = 2; delay(200); break; }
+      } break;
+    case 2: // Online
+      lcd.setCursor(2,0); lcd.print("online mode: ");
+      lcd.setCursor(0,1); lcd.print("use the software");
+      while (digitalRead(rightButtonPin) == 1) {
+        digitalWrite(pindyaljoy, LOW); digitalWrite(pindyalonline, HIGH);
+        if (digitalRead(leftButtonPin) == HIGH) { modeState = 0; break; }
+        if (digitalRead(rightButtonPin) == 0)   { scopeState = 3; delay(200); break; }
+      } break;
+    case 3: // Joystick
+      lcd.setCursor(1,0); lcd.print("joystick mode");
+      while (digitalRead(rightButtonPin) == 1) {
+        digitalWrite(pindyaljoy, HIGH); digitalWrite(pindyalonline, LOW);
+        if (digitalRead(leftButtonPin) == HIGH) { modeState = 0; break; }
+        if (digitalRead(rightButtonPin) == 0)   { scopeState = 1; digitalWrite(pindyaljoy, LOW); delay(200); break; }
+      } break;
+  }
+}
+\end{lstlisting}
+
+\clearpage
+
+\chapter{Code complet : Arduino n°2 (Pilote des moteurs)}
+\addcontentsline{toc}{chapter}{Annexe B : Code Arduino n°2}
+Ce second microcontrôleur reçoit les consignes (par série) ou les commandes joystick, et pilote directement les deux moteurs pas-à-pas via les drivers A4988.
+
+\begin{lstlisting}[language=C++, caption={Firmware complet de l'Arduino n°2 (commande moteurs).}, label={lst:arduino2}]
+/* Arduino n°2 : commande moteurs */
+#include 
+
+String inputString = "";
+int azimuth = 0, altitude = 0;
+
+const int stepPin1 = 2, dirPin1 = 3;
+int prexx = 0, prezz = 0;
+const int stepPin2 = 5, dirPin2 = 4;
+int prealt = 0, preaz = 0;
+
+const int joystickXPin = A0, joystickYPin = A1;
+int pindyaljoy = 10, pindyalonline = 11;
+const int threshold = 50;
+
+AccelStepper motor1(AccelStepper::DRIVER, stepPin1, dirPin1);
+AccelStepper motor2(AccelStepper::DRIVER, stepPin2, dirPin2);
+const int maxSpeed = 500, accel = 500;
+
+void setup() {
+  pinMode(6, INPUT);
+  pinMode(pindyaljoy, INPUT);
+  pinMode(pindyalonline, INPUT);
+  motor1.setMaxSpeed(maxSpeed); motor1.setAcceleration(accel);
+  motor2.setMaxSpeed(maxSpeed); motor2.setAcceleration(accel);
+  Serial.begin(9600);
+  long steps007 = map(40 * 2, 0, 360, 0, 200 * 32);
+  motor1.moveTo(-steps007 * 2.2);
+  if (digitalRead(6) == HIGH) {
+    while (motor1.distanceToGo() != 0) motor1.run();
+  }
+}
+
+void loop() {
+  if (digitalRead(pindyaljoy) == LOW) {
+    if (Serial.available() > 0) {
+      inputString = Serial.readStringUntil('\n');
+      Serial.println(inputString);
+      int i1 = inputString.indexOf('°');
+      int i2 = inputString.lastIndexOf('°');
+      if (i1 != -1 && i2 != -1 && i1 != i2) {
+        azimuth = inputString.substring(0, i1).toInt();
+        altitude = inputString.substring(i1+1, i2).toInt();
+        steptep(altitude, azimuth);
+        altitude = 0; azimuth = 0;
+      }
+    }
+  } else if (digitalRead(pindyalonline) == HIGH && digitalRead(pindyaljoy) == LOW) {
+    if (Serial.available()) {
+      inputString = Serial.readString();
+      // (parsing ASCII complet : deg ° min ' sec ")
+      int f1 = inputString.indexOf('°');
+      int f2 = inputString.indexOf('\'');
+      int f3 = inputString.indexOf('\"');
+      String altDeg = inputString.substring(0, f1);
+      String altMin = inputString.substring(f1+1, f2);
+      String altSec = inputString.substring(f2+1, f3);
+      int xx = altDeg.toInt() - prexx;
+      prexx = altDeg.toInt();
+      int zz = inputString.substring(f3+1, inputString.indexOf('°', f1+1)).toInt();
+      steptep(xx, zz);
+    }
+  } else if (digitalRead(pindyaljoy) == HIGH && digitalRead(pindyalonline) == LOW) {
+    int xv = analogRead(joystickXPin);
+    int yv = analogRead(joystickYPin);
+    if (xv < (512 - threshold))       motor1.setSpeed(-maxSpeed);
+    else if (xv > (512 + threshold))  motor1.setSpeed(maxSpeed);
+    else                              motor1.setSpeed(0);
+    if (yv < (512 - threshold))       motor2.setSpeed(-maxSpeed);
+    else if (yv > (512 + threshold))  motor2.setSpeed(maxSpeed);
+    else                              motor2.setSpeed(0);
+    motor1.runSpeed(); motor2.runSpeed();
+  }
+}
+
+void steptep(int a, int b) {
+  a = a - prealt;
+  b = b - preaz;
+  long stepsAz = map(b * 2, 0, 360, 0, 200 * 32);
+  long stepsAlt = map(a * 2, 0, 360, 0, 200 * 32);
+  motor2.moveTo(motor2.currentPosition() + stepsAz * 8.18);
+  motor1.moveTo(motor1.currentPosition() + stepsAlt * 2.2);
+  while (motor1.distanceToGo() != 0 || motor2.distanceToGo() != 0) {
+    if (digitalRead(6) == LOW) { motor1.run(); }
+    else if (digitalRead(6) == HIGH) {
+      motor1.stop(); b = 40; preaz = 40; break;
+    }
+    motor2.run();
+  }
+  prealt = a + prealt; preaz = b + preaz;
+}
+\end{lstlisting}
+
+\clearpage
+
+\chapter{Code complet : Application Python (Stellarium Scraper)}
+\addcontentsline{toc}{chapter}{Annexe C : Code Python}
+L'application Python tourne sur le PC de l'utilisateur. Elle fournit une interface graphique (Tkinter), scrape Stellarium Web via Selenium, et transmet les coordonnées par UART à l'Arduino n°2.
+
+\begin{lstlisting}[language=Python, caption={Application Python (Tkinter + Selenium + PySerial).}, label={lst:python}]
+import tkinter as tk
+from tkinter import ttk, scrolledtext
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.common.exceptions import TimeoutException
+import threading, sys, glob, time
+from PIL import Image, ImageTk
+import serial
+
+class StellariumApp:
+    def __init__(self, master):
+        self.master = master
+        master.title("Stellarium Web Scraper")
+        master.geometry("600x400")
+        master.configure(bg='navy')
+        self.sky_objects = [
+            "Sun", "Moon", "Mercury", "Venus", "Mars", "Jupiter", "Saturn",
+            "Uranus", "Neptune", "Pluto", "Sirius", "Betelgeuse", "Rigel",
+            "Vega", "Antares", "Aldebaran", "Pollux", "Spica", "Arcturus",
+            "Capella", "Procyon", "Achernar", "Deneb", "Regulus", "Altair",
+            "Pleiades", "Orion Nebula", "Andromeda Galaxy", "Crab Nebula",
+            "Whirlpool Galaxy", "Triangulum Galaxy", "Sombrero Galaxy",
+            "Centaurus A", "Carina Nebula", "Eagle Nebula", "Omega Centauri",
+            "47 Tucanae", "Horsehead Nebula", "Crab Pulsar", "Beehive Cluster",
+            "Dumbbell Nebula", "Ring Nebula", "Pinwheel Galaxy",
+            "Bode's Galaxy", "Cigar Galaxy", "Tarantula Nebula",
+            "Helix Nebula", "Lagoon Nebula", "Trifid Nebula",
+            "Pillars of Creation"
+        ]
+        self.set_background_image()
+        self.create_widgets()
+        self.animate_background()
+
+    def serial_ports(self):
+        global resultport
+        if sys.platform.startswith('win'):
+            ports = ['COM%s' % (i+1) for i in range(256)]
+        else:
+            raise EnvironmentError('Unsupported platform')
+        resultport = []
+        for port in ports:
+            try:
+                s = serial.Serial(port); s.close()
+                resultport.append(port)
+            except (OSError, serial.SerialException):
+                pass
+        if len(resultport) == 0:
+            resultport.append("No device is connected")
+        return resultport
+
+    def set_background_image(self):
+        bg = Image.open("milky-way.jpeg")
+        bg = bg.resize((1200,800), Image.Resampling.LANCZOS)
+        self.bg_photo = ImageTk.PhotoImage(bg)
+        self.canvas = tk.Canvas(self.master, width=800, height=600)
+        self.canvas.pack(fill="both", expand=True)
+        self.bg_image_id = self.canvas.create_image(0, 0, image=self.bg_photo, anchor="nw")
+
+    def create_widgets(self):
+        frame = tk.Frame(self.master, bg='#151f36')
+        frame.place(relx=0.5, rely=0.5, anchor='center')
+        ttk.Label(frame, text="Select a sky object:",
+                  background='#151f36', foreground='white').pack(pady=10)
+        ports = self.serial_ports()
+        self.object_var2 = tk.StringVar()
+        self.object_combo = ttk.Combobox(frame, textvariable=self.object_var2, values=ports)
+        self.object_combo.pack(pady=6); self.object_combo.set("select the port")
+        self.object_var = tk.StringVar()
+        self.object_combo = ttk.Combobox(frame, textvariable=self.object_var, values=self.sky_objects)
+        self.object_combo.pack(pady=5); self.object_combo.set(self.sky_objects[0])
+        ttk.Button(frame, text="Search", command=self.start_search).pack(pady=10)
+        self.result_text = scrolledtext.ScrolledText(frame, width=50, height=10, bg='#2e437c', fg='white')
+        self.result_text.pack(pady=10)
+
+    def start_search(self):
+        self.result_text.delete('1.0', tk.END)
+        self.result_text.insert(tk.END, "Searching... Please wait.\n")
+        threading.Thread(target=self.search_object, daemon=True).start()
+
+    def search_object(self):
+        chosenport = self.object_var2.get()
+        arduino = serial.Serial(port=resultport[0], baudrate=115200, timeout=1)
+        name1 = self.object_var.get()
+        service = Service(executable_path='chromedriver.exe')
+        options = webdriver.ChromeOptions()
+        options.add_argument("--headless=new")
+        driver = webdriver.Chrome(service=service, options=options)
+        try:
+            driver.get('https://stellarium-web.org/')
+            WebDriverWait(driver, 20).until(
+                EC.presence_of_element_located((By.CSS_SELECTOR, 'body')))
+            try:
+                close_button = WebDriverWait(driver, 0.5).until(
+                    EC.element_to_be_clickable((By.CSS_SELECTOR, 'button[title="Close"]')))
+                close_button.click()
+            except TimeoutException: pass
+            search_box = WebDriverWait(driver, 10).until(
+                EC.presence_of_element_located((By.ID, 'input-33')))
+            search_box.send_keys(name1); search_box.send_keys(u'\ue007')
+            object_element = WebDriverWait(driver, 20).until(
+                EC.element_to_be_clickable((By.XPATH, f"//div[contains(text(), '{name1}')]")))
+            object_element.click()
+            WebDriverWait(driver, 20).until(
+                EC.presence_of_element_located((By.CSS_SELECTOR, '.row.no-gutters')))
+            radec_vals = driver.find_elements(By.CLASS_NAME, "radecVal")
+            az = (radec_vals[9].text, radec_vals[10].text, radec_vals[11].text)
+            alt = (radec_vals[6].text, radec_vals[7].text, radec_vals[8].text)
+            result = f"{az[0]} {az[1]} {az[2]}\n{alt[0]} {alt[1]} {alt[2]}\n"
+            arduino.write(bytes(result, 'utf-8')); time.sleep(0.05)
+            self.master.after(0, self.update_result, result)
+        except TimeoutException as e:
+            self.master.after(0, self.update_result, f"Error: {e}")
+        finally:
+            driver.quit()
+
+    def update_result(self, result):
+        self.result_text.delete('1.0', tk.END)
+        self.result_text.insert(tk.END, result)
+
+    def animate_background(self):
+        x, y = self.canvas.coords(self.bg_image_id)
+        new_x = x - 0.5
+        if new_x <= -800: new_x = 0
+        self.canvas.coords(self.bg_image_id, new_x, y)
+        self.master.after(50, self.animate_background)
+
+if __name__ == "__main__":
+    root = tk.Tk()
+    app = StellariumApp(root)
+    root.mainloop()
+\end{lstlisting}
+
+\clearpage
+
+\chapter{Schémas de câblage détaillés}
+\addcontentsline{toc}{chapter}{Annexe D : Schémas de câblage}
+
+\section{Brochage Arduino n°1}
+\begin{table}[H]
+    \centering
+    \caption{Brochage complet de l'Arduino n°1 (Télécommande).}
+    \begin{tabular}{|l|l|l|}
+        \hline
+        \textbf{Broche} & \textbf{Direction} & \textbf{Connexion} \\
+        \hline
+        A0 & IN analogique & Joystick Y \\
+        A1 & IN analogique & Joystick X \\
+        A4 & I2C SDA & LCD I2C \\
+        A5 & I2C SCL & LCD I2C \\
+        D2 & OUT & STEP1 (Az) (vers Arduino 2) \\
+        D3 & OUT & DIR1 (Az) \\
+        D4 & OUT & DIR2 (Alt) \\
+        D5 & OUT & STEP2 (Alt) \\
+        D8 & OUT & ONLINE\_MODE (vers Ard2) \\
+        D9 & OUT & JOY\_MODE (vers Ard2) \\
+        D10 & IN pull-up & Bouton « Scope » \\
+        D11 & IN & Bouton « Mode » \\
+        D12 & IN pull-up & Joystick switch \\
+        TX/RX & UART & Vers Arduino n°2 \\
+        VIN & POWER & 7-12 V \\
+        \hline
+    \end{tabular}
+\end{table}
+
+\section{Brochage Arduino n°2}
+\begin{table}[H]
+    \centering
+    \caption{Brochage complet de l'Arduino n°2 (Pilote moteurs).}
+    \begin{tabular}{|l|l|l|}
+        \hline
+        \textbf{Broche} & \textbf{Direction} & \textbf{Connexion} \\
+        \hline
+        A0 & IN analogique & Joystick X (recopié) \\
+        A1 & IN analogique & Joystick Y (recopié) \\
+        D2 & OUT & STEP du driver 1 (Az) \\
+        D3 & OUT & DIR du driver 1 (Az) \\
+        D4 & OUT & DIR du driver 2 (Alt) \\
+        D5 & OUT & STEP du driver 2 (Alt) \\
+        D6 & IN pull-up & Fin de course (homing) \\
+        D10 & IN & JOY\_MODE (depuis Ard1) \\
+        D11 & IN & ONLINE\_MODE (depuis Ard1) \\
+        TX/RX & UART & USB / Vers Arduino n°1 \\
+        \hline
+    \end{tabular}
+\end{table}
+
+\section{Câblage A4988}
+Chaque driver A4988 est câblé comme suit :
+\begin{itemize}
+    \item \texttt{VMOT} et \texttt{GND}\textsubscript{MOT} reliés au bus 12 V (avec condensateur de découplage 100 µF) ;
+    \item \texttt{VDD} et \texttt{GND}\textsubscript{LOG} reliés au bus 5 V ;
+    \item \texttt{STEP} et \texttt{DIR} reliés aux broches D2/D3 (driver 1) ou D5/D4 (driver 2) ;
+    \item \texttt{MS1}, \texttt{MS2}, \texttt{MS3} mises à \texttt{HIGH} pour configuration microstepping 1/32 ;
+    \item \texttt{ENABLE} mis à \texttt{LOW} (drivers actifs) ;
+    \item \texttt{RESET} et \texttt{SLEEP} reliés ensemble à \texttt{HIGH} ;
+    \item Bobines moteur : \texttt{1A, 1B, 2A, 2B} aux quatre fils du NEMA 17 ;
+    \item Potentiomètre $V_{ref}$ ajusté à $0{,}64$ V pour $I_{\max} = 0{,}8$ A.
+\end{itemize}
+
+\section{Connecteur télécommande $\leftrightarrow$ télescope}
+Le câble blindé entre la télécommande et le boîtier électronique du télescope comporte 8 conducteurs :
+\begin{enumerate}
+    \item +12 V (alimentation depuis batterie)
+    \item GND
+    \item +5 V (depuis UBEC interne du télescope)
+    \item TX (UART)
+    \item RX (UART)
+    \item JOY\_MODE (D9 $\leftrightarrow$ D10)
+    \item ONLINE\_MODE (D8 $\leftrightarrow$ D11)
+    \item Reserve / Bouton URGENCE
+\end{enumerate}
+
+\end{document}
