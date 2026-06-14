@@ -1,78 +1,103 @@
-# Autoguided Dobsonian Telescope 🔭
+<h1 align="center">
+  <br>
+  <a href="https://github.com/OussamaAKHAIL/AK-SCOPE"><img src="photos/AK-SCOPE%20LOGO.png" width="220"></a>
+  <br>
+  <b>AK-SCOPE</b>
+  <br>
+</h1>
 
-![Telescope](photos/telescope.png)
+<h1 align="center">
+ <a href="https://github.com/OussamaAKHAIL/AK-SCOPE/stargazers">
+        <img src="https://img.shields.io/github/stars/OussamaAKHAIL/AK-SCOPE?color=yellow&label=Stars" width="100">
+ </a>
+ <a href="https://github.com/OussamaAKHAIL/AK-SCOPE/network/members">
+        <img src="https://img.shields.io/github/forks/OussamaAKHAIL/AK-SCOPE?color=orange&label=Forks" width="100">
+ </a>
+ <a href="https://www.arduino.cc/">
+        <img src="https://img.shields.io/badge/Platform-Arduino-00979D?logo=arduino&logoColor=white" width="130">
+ </a>
+ <a href="https://www.python.org/">
+        <img src="https://img.shields.io/badge/Language-Python-3776AB?logo=python&logoColor=white" width="120">
+ </a>
+</h1>
 
-## Overview
-This repository contains the design, mathematical modeling, and hardware/software implementation of an **Autoguided Dobsonian Telescope**. The primary objective is to make astronomical observation more accessible by automating the aiming and tracking of celestial objects. 
+# General information
 
-This project was carried out by **AK-HAIL Oussama** as part of an engineering internship in partnership with **Orange Digital Center** and **Moussasoft**.
+**AK-SCOPE** is a custom-built, fully open-source **Autoguided Dobsonian Telescope**. It combines 3D-printed mechanics, dual Arduino microcontrollers, and a Python-based interface to automatically aim and track celestial objects using spherical trigonometry.
 
-## Key Features
-* **Custom 3D Printed & Laser-Cut Mechanics**: Designed entirely on Onshape.
-* **Dual-Microcontroller Architecture**: Uses two Arduino Nano boards to isolate stepper motor control from the user interface and calculations, preventing electromagnetic interference (EMI).
-* **Four Operating Modes**:
-  1. **Offline Mode**: Implements spherical trigonometry equations directly on the Arduino to convert equatorial coordinates (RA, Dec) to horizontal coordinates (Alt, Az) on the fly for an embedded catalog of 20 stars.
-  2. **Online Mode**: A Python/Tkinter desktop app that interfaces with Stellarium Web (via Selenium) to scrape coordinates and send them to the telescope via UART.
-  3. **Tracking Mode**: Algorithm that continuously compensates for Earth's rotation by updating Alt/Az speeds in real-time.
-  4. **Manual Mode**: Analog joystick control for manual point-and-shoot.
+<div align="center">
+  <img src="photos/Design%20sans%20titre.jpg" width="800" alt="AK-SCOPE Poster">
+</div>
 
-## Hardware Architecture
+<br>
 
-### Mechanical Design
-The telescope uses a Dobsonian (Alt-Azimuth) mount, chosen for its stability and low cost.
+> [!IMPORTANT]
+> This repository contains the complete software stack (embedded C++ and Python GUI), Onshape 3D models, electronic schematics, and the theoretical research report backing the project.
 
-* **Azimuth Base**: Driven by a GT2 timing belt acting as a ring gear, mounted on laser-cut plexiglass with a 35.7:1 reduction ratio.
-<img src="photos/Screenshot%202026-05-19%20132845.png" width="600" alt="Azimuth Base CAD"/>
+If you want to understand the theoretical foundation, check the included `main.tex` and the LaTeX report.
 
-* **Altitude Axis**: Uses a 3D-printed half-gear mechanism with an 8.7:1 reduction ratio.
-<img src="photos/04BB0BE9-6127-46EB-9F57-6F1394A6B058.png" width="600" alt="Altitude Axis CAD"/>
+# Status
 
-* **Telescopic Body**: Concentric PVC tubes with 3D-printed translation mechanisms for manual focusing.
+> [!IMPORTANT]
+> AK-SCOPE is a functional prototype. It successfully implements offline tracking (using a predefined star catalog), online tracking (via Stellarium), and manual joystick control.
 
-![Assembled Telescope](photos/Screenshot%202026-06-09%20220752.png)
-*(General view of the assembled telescope)*
+| Mechanical Design (Onshape CAD) | Assembled Telescope |
+| :---: | :---: |
+| <img src="photos/Screenshot%202026-05-19%20132845.png" width="400"> | <img src="photos/Screenshot%202026-06-09%20220752.png" width="400"> |
 
-### Electronic Design
-To ensure stability and isolate noise, the electronics are separated into two main circuits communicating via UART through an **ISO7221** digital isolator.
+| Remote Control GUI (Python) | 3D Printed Remote Enclosure |
+| :---: | :---: |
+| <img src="photos/F51UJS4M3SR4LW2.png" width="400"> | <img src="photos/Screenshot%202026-06-06%20141017.png" width="400"> |
 
-#### 1. Motor Control Circuit (Arduino #2)
-Dedicated to power management and movement. It drives two NEMA 17 stepper motors via A4988 drivers with 1/32 microstepping for high precision and smooth movement.
-![Motor Control Circuit](photos/jj.drawio.png)
+# Features and Operating Modes
 
-#### 2. Remote Control Circuit (Arduino #1)
-Acts as the brain of the system. It handles the UI (16x2 I2C LCD, joystick, buttons) and the intensive spherical trigonometry calculations.
-![Remote Control Circuit](photos/second%20ar.drawio.png)
+The system operates across four primary modes:
+1. **Offline Mode**: Uses embedded spherical trigonometry to convert RA/Dec to Alt/Az for 20 predefined stars directly on the Arduino.
+2. **Online Mode**: Uses a Python Tkinter app to scrape Stellarium Web via Selenium and sends coordinates to the telescope.
+3. **Tracking Mode**: Continuously compensates for the Earth's rotation to keep the object centered.
+4. **Manual Mode**: Allows point-and-shoot using an analog joystick.
 
-![Remote Control Device](photos/Screenshot%202026-06-06%20141017.png)
-*(3D printed remote control enclosure)*
+# Hardware Architecture
 
-## Software Architecture
+The electronics are intentionally separated to prevent electromagnetic interference (EMI) from the stepper motor drivers.
 
-### Embedded System (C++)
-The Arduino firmware implements:
-- **Spherical Trigonometry**: Calculates Local Sidereal Time (LST) and Hour Angle (HA) to deduce Altitude and Azimuth.
-- **Motor Control**: Converts Alt/Az angles into precise stepper motor pulses using the `AccelStepper` library.
-- **Following Algorithm**: Calculates the instantaneous angular velocities required for both axes to track celestial objects as the Earth rotates.
+<div align="center">
 
-### PC Interface (Python)
-The `software.py` script provides a GUI to control the telescope online:
-- Connects to the Arduino via Serial.
-- Uses **Selenium** to automatically search for objects on Stellarium Web and extracts real-time Alt/Az coordinates.
+| Component | Description |
+|-----------|-------------|
+| **Arduino #1 (Remote)** | Handles UI (LCD, Joystick, Buttons) and intensive math calculations. |
+| **Arduino #2 (Motors)** | Receives commands via UART and drives two NEMA 17 steppers via A4988. |
+| **ISO7221** | Digital isolator separating the communication of the two circuits. |
+| **Mechanics** | GT2 timing belts, laser-cut plexiglass, and 3D printed PLA. |
 
-![Python Interface](photos/F51UJS4M3SR4LW2.png)
-*(Python Tkinter GUI for Online Mode)*
+</div>
 
-## Project Structure
-* `CADs/`: 3D models and Onshape exports.
-* `codes/`: Source code for the dual Arduino setup (`arduino1.cpp`, `arduino2.cpp`) and the Python control script (`software.py`).
-* `photos/`: Images, CAD screenshots, and diagrams of the assembly and software.
-* `circuits.pdf`: Detailed schematics of the electronic circuits.
-* `main.tex`: LaTeX source of the internship report detailing the theoretical and practical aspects.
+# Usage examples
 
-## Acknowledgments
-* **Mohammed Bsiss** (Supervisor)
-* **Orange Digital Center Agadir** (FabLab resources & tools)
-* **Moussasoft** (Electronic components and expertise)
+To run the PC Interface (Online Mode), simply run the Python script:
 
-## License
+```sh
+python codes/software.py
+```
+*Select your COM port from the dropdown, pick a celestial object, and hit Search.*
+
+# Firmware and Code
+
+All C++ firmware code must be uploaded to the respective Arduino boards:
+- `codes/arduino1.cpp` -> Upload to the Remote Control Arduino.
+- `codes/arduino2.cpp` -> Upload to the Motor Control Arduino.
+
+# Main team
+
+- **AK-HAIL Oussama** - *Creator & Lead Developer*
+
+# Special Thanks
+
+This project was carried out as part of an engineering internship. A huge thanks to:
+- **Mohammed Bsiss** (Supervisor)
+- [**Orange Digital Center Agadir**](https://www.orangedigitalcenters.com/) for providing FabLab resources (3D printers, laser cutters, oscilloscopes).
+- [**Moussasoft**](https://www.moussasoft.com/) for supplying electronic components and expertise.
+
+# License
+
 Feel free to explore the code, modify it, and build your own versions of the telescope!
