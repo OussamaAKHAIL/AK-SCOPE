@@ -43,7 +43,7 @@ If you want to understand the theoretical foundation in full detail, check the i
 
 | Mechanical Design (Onshape CAD) | Assembled Telescope |
 | :---: | :---: |
-| <img src="photos/Screenshot%202026-05-19%20132845.png" width="400"> | <img src="Screenshot 2026-06-11 142301.png" width="400"> |
+| <img src="photos/Screenshot%202026-05-19%20132845.png" width="400"> | <img src="photos/Screenshot 2026-06-11 142301.png" width="400"> |
 
 | Remote Control GUI (Python) | 3D Printed Remote Enclosure |
 | :---: | :---: |
