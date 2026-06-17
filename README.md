@@ -75,6 +75,8 @@ The project's central ambition is to democratise observational astronomy — to 
 - 🌐 **Hybrid Online/Offline** — works with or without a host PC and internet connection.
 - ♾️ **Open Forever** — released under the MIT License.
 
+> ❤️ **A personal note** — AK-SCOPE was designed and built while I was undergoing cancer treatment. It became something to focus on and look forward to, and a reminder that the will to build and stay curious doesn't have to pause for anything. If you're going through something difficult yourself: keep building, keep looking up.
+
 ---
 <a name="showcase"></a>
 ## 📸 Showcase
@@ -221,7 +223,7 @@ For real-time tracking, the firmware differentiates the equations w.r.t. time to
 
 The complete walkthrough is published on Instructables. Below is the summarised step-by-step roadmap, including the YouTube companion videos that accompany each step.
 
-> ⚠️ The video links below need the actual YouTube URLs added — they were missing from the source file.
+> 📺 Companion build videos are linked below for most steps. Step 3 (X-Axis Rotation) and Step 9 (Remote Control System) still need a video link — let me know if you have URLs for those too.
 
 ### 🧩 Step 1 — CAD Conception
 
@@ -236,7 +238,7 @@ The azimuth base is split into two plexiglass desks:
 
 Result: a low-friction, high-reduction (35.7 : 1) azimuth drive.
 
-🎥 **Watch:** Building the Rotating Base *(add video link)*
+🎥 **Watch:** [Building the Rotating Base](https://www.youtube.com/watch?v=d7a5lvFX6Rc)
 
 ### ⛰️ Step 3 — Building the X-Axis Rotation (Altitude)
 
@@ -260,13 +262,13 @@ Magnification follows: `M = f_objective / f_eyepiece`.
 
 This yields excellent results on the Moon (craters, mare boundaries) and large deep-sky comets (e.g. C/2023 A3), while remaining honest about the limits for planetary detail.
 
-🎥 **Watch:** Lenses & Magnification *(add video link)*
+🎥 **Watch:** [Lenses & Magnification](https://youtu.be/DWe59-dM--M?si=x5bWFuW_XP3ATZUT)
 
 ### 🛢️ Step 5 — Telescope Body
 
 The tube is built from two concentric PVC pipes (Ø 63 mm / Ø 50 mm). Two custom 3D-printed sliders allow the inner tube to translate inside the outer one for manual focusing while staying perfectly co-axial. A screw-nut + bearing fixture clamps the body to the altitude assembly. Lens holders are friction-fit (no glue), making the optics swap-friendly.
 
-🎥 **Watch:** Telescope Body Assembly *(add video link)*
+🎥 **Watch:** [Telescope Body Assembly](https://youtu.be/wbwmED2qfNg?si=T4QrXP51SzCjnUNL)
 
 ### 🧪 Step 6 — Testing Mechanism
 
@@ -277,7 +279,7 @@ Once the rotating base, altitude axis, and tube are integrated, the mechanism is
 - Smooth focus translation.
 - Centre of gravity correctly balanced on the Dobsonian mount.
 
-🎥 **Watch:** Testing Mechanism *(add video link)*
+🎥 **Watch:** [Testing Mechanism](https://youtu.be/jE0oE5Yuza8?si=Z2FwAbJUk4BcMglm)
 
 ### ⚡ Step 7 — Wiring and Power Supply
 
@@ -300,6 +302,8 @@ Once the rotating base, altitude axis, and tube are integrated, the mechanism is
 | VMOT | 12 V motor rail |
 | MS1/MS2/MS3 | Tied to 5 V → 1/16-step (lowest speed mode) |
 
+🎥 **Watch:** [Assembly with the Power System](https://youtu.be/29xAdc7EMA0?si=pFDe5JI_a19NRq8n)
+
 ### 🎮 Step 8 — Design of the Remote Control
 
 The remote is built around three controls plus a 16×2 LCD:
@@ -310,7 +314,7 @@ The remote is built around three controls plus a 16×2 LCD:
 
 The layout is optimised for one-handed use in the dark; the LCD provides real-time feedback (current mode, selected star, tracking status).
 
-🎥 **Watch:** Remote Control Design *(add video link)*
+🎥 **Watch:** [Remote Control Design](https://youtu.be/5FjqMT-yQk0?si=wyQ0-Qey9Sat4-Is)
 
 ### 🧠 Step 9 — Remote Control System (Dual-Arduino Logic)
 
@@ -332,7 +336,7 @@ This separation eliminated all interference and prevented accidental motor movem
 - A 3D-printed PCB holder mounts the electronics inside the body.
 - A dedicated access hole in the body lets the user plug a USB cable into Arduino #2 when switching to Online Mode.
 
-🎥 **Watch:** Power Supply & PCB *(add video link)*
+🎥 **Watch:** [Power Supply & PCB](https://youtu.be/ZqNfNcRCQg0?si=L8rH6SQXzxrSDoBn)
 
 ### 🧮 Step 11 — The Math Behind Azimuth and Altitude
 
@@ -378,7 +382,7 @@ A green laser was bore-sighted to the optical axis with a 3D-printed bracket —
 - Implement a complete sidereal tracking mode (now realised in the firmware).
 - Add plate-solving for autonomous alignment.
 
-🎥 **Watch:** Final Test & First Light *(add video link)*
+🎥 **Watch:** [Final Test & First Light](https://youtu.be/H4y4p9HcZMU?si=3CywjkYnZIS9FgZf)
 
 ---
 <a name="repository-structure"></a>
