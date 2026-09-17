@@ -564,7 +564,9 @@ Thanks goes to these wonderful people who contributed to this project:
 | Avatar | Contributor | Role |
 |---|---|---|
 | <img src="https://github.com/OussamaAKHAIL.png" width="60"/> | Oussama AK-HAIL | 👨‍🔬 Creator, Lead Developer, Mechanical & Electronic Designer, Firmware & GUI Author |
-| <img src="https://github.com/oussamabel003.png" width="60"/> | [Oussama Bel](https://github.com/oussamabel003) | 🤝 Contributor |
+| <img src="https://github.com/oussamabel003.png" width="60"/> | [Oussama Belarch](https://github.com/oussamabel003) | 🤝 Contributor |
+| <img src="https://github.com/aadilagoussal.png" width="60"/> | [Aadil Agoussal](https://github.com/aadilagoussal) | 🤝 Contributor |
+
 
 
 > Want to see your face here? Open a PR! Even small improvements — documentation typos, translated comments, additional schematic notes — earn you a slot in this list.
