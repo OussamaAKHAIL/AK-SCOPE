@@ -2,7 +2,7 @@
 
 <img src="https://github.com/OussamaAKHAIL/AK-SCOPE/blob/main/photos/AK-SCOPE%20LOGO.png?raw=true" alt="AK-SCOPE Logo" width="220"/>
 
-# 🔭 AK-SCOPE
+# 🔭 AK-SCOPE test didkass ayoub
 
 ### An Open-Source, Autoguided Dobsonian Telescope
 
